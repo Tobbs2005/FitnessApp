@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Lat Pulldown",
+    "muscles": ["Lats", "Biceps", "Rear Delts"],
+    "steps": [
+      "Grip the bar slightly wider than shoulder width, palms facing away",
+      "Pull the bar down toward your upper chest",
+      "Squeeze your shoulder blades together at the bottom",
+      "Slowly let the bar rise back up with control"
+    ],
+    "common_mistake": "Pulling with your arms instead of your back. Think about driving your elbows down toward your hips rather than pulling with your hands."
+  },
+  {
+    "id": 2,
+    "name": "Face Pulls",
+    "muscles": ["Rear Delts", "Traps", "Rotator Cuff"],
+    "steps": [
+      "Set a cable machine to upper chest height with a rope attachment",
+      "Pull the rope toward your face, separating your hands as you pull",
+      "Keep your elbows high and parallel to the ground",
+      "Slowly return to the starting position with control"
+    ],
+    "common_mistake": "Letting your elbows drop down. Keep them up the whole time or you end up working your biceps instead of your rear delts."
+  },
+  {
+    "id": 3,
+    "name": "Overhead Press",
+    "muscles": ["Front Delts", "Side Delts", "Triceps", "Upper Chest"],
+    "steps": [
+      "Hold the bar or dumbbells at shoulder height, elbows slightly in front",
+      "Press straight up until your arms are fully extended",
+      "Keep your core tight and avoid arching your lower back",
+      "Lower the weight back to shoulder height with control"
+    ],
+    "common_mistake": "Flaring your elbows out too wide. Keep them at about a 45 degree angle to protect your shoulders and get a stronger press."
+  },
+  {
+    "id": 4,
+    "name": "Preacher Curl",
+    "muscles": ["Biceps", "Brachialis"],
+    "steps": [
+      "Sit at the preacher bench and grip the EZ bar at the angled part",
+      "Start with arms almost fully extended over the pad",
+      "Curl the bar up toward your shoulders",
+      "Slowly lower it back down without letting your arms drop completely"
+    ],
+    "common_mistake": "Using momentum to swing the bar up. The pad is there to isolate your biceps so keep your arms pressed against it the whole time."
+  },
+  {
+    "id": 5,
+    "name": "Tricep Pushdown",
+    "muscles": ["Triceps"],
+    "steps": [
+      "Set a cable machine to the highest position with a straight bar or rope attachment",
+      "Grip the bar with palms facing down and tuck your elbows at your sides",
+      "Push the bar straight down until your arms are fully extended",
+      "Slowly let the bar rise back up, keeping your elbows locked in place"
+    ],
+    "common_mistake": "Letting your elbows flare out or move forward as you push down. Keep them pinned to your sides the whole time or you take the tension off your triceps."
+  }
+]

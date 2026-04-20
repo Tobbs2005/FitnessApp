@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Results – Mastering the Pull{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center text-center">
+  <div class="col-md-8">
+
+    <h1 class="display-4 fw-bold">You Have Completed The Quiz!</h1>
+
+    <p class="lead mt-3">
+      Great work making it through all {{ total_questions }} questions. You should now have a
+      solid understanding of the key upper body exercises, which muscles they target,
+      and the most common mistakes to avoid.
+    </p>
+
+    <!-- Score badge -->
+    <div class="my-4">
+      <span class="display-5 fw-bold">
+        {{ score }} / {{ total_questions }}
+      </span>
+      <p class="text-muted mt-1">
+        {% if score == total_questions %}
+          Perfect score — excellent work!
+        {% elif score >= 3 %}
+          Good job — keep it up!
+        {% else %}
+          Don't worry, review the exercises below and try again!
+        {% endif %}
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Per-question breakdown -->
+<div class="row justify-content-center mt-2">
+  <div class="col-md-10">
+    <h5 class="fw-semibold mb-3">Answer Summary</h5>
+
+    {% for item in summary %}
+    <div class="card mb-3 border-{{ 'success' if item.is_correct else 'danger' }}">
+      <div class="card-header fw-semibold">
+        Question {{ loop.index }}: {{ item.question }}
+      </div>
+      <div class="card-body">
+
+        <p class="mb-1">
+          <strong>Your answer:</strong>
+          <span class="badge bg-{{ 'success' if item.is_correct else 'danger' }}">
+            {{ item.chosen if item.chosen else '—' }}) {{ item.chosen_text }}
+          </span>
+        </p>
+
+        {% if not item.is_correct %}
+        <p class="mb-1">
+          <strong>Correct answer:</strong>
+          <span class="badge bg-success">
+            {{ item.correct }}) {{ item.correct_text }}
+          </span>
+        </p>
+        {% endif %}
+
+        {% if item.feedback %}
+        <p class="mt-2 mb-0 text-muted fst-italic">{{ item.feedback }}</p>
+        {% endif %}
+
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+<!-- Action buttons -->
+<div class="row justify-content-center mt-2">
+  <div class="col-md-8 text-center">
+    <p class="fw-semibold">Feel Free To Keep Reviewing the Exercises!</p>
+    <a href="{{ url_for('learn', lesson_num=1) }}" class="btn btn-outline-primary me-2">
+      Review Exercises
+    </a>
+    <a href="{{ url_for('quiz_intro') }}" class="btn btn-warning">
+      Retake Quiz
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Home – Mastering the Pull{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center text-center mt-5">
+  <div class="col-md-8">
+
+    <h1 class="display-4 fw-bold">MASTERING THE PULL</h1>
+    <p class="lead mt-3">
+      In the next few minutes, you'll get familiar with the five major upper
+      body muscle groups and the key exercises that target each one.
+    </p>
+
+    <!-- Start creates a new DB session and goes to lesson 1 -->
+    <form action="{{ url_for('start') }}" method="POST" class="mt-4">
+      <button type="submit" class="btn btn-warning btn-lg px-5">
+        CLICK TO BEGIN YOUR WEIGHT LIFTING JOURNEY
+      </button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+[
+  {
+    "id": 1,
+    "question": "Which muscle group does the lat pulldown primarily target?",
+    "options": {
+      "A": "Biceps",
+      "B": "Latissimus Dorsi",
+      "C": "Triceps",
+      "D": "Front Delts"
+    },
+    "correct": "B",
+    "explanations": {
+      "A": "Not quite. Your biceps do assist during the lat pulldown, but they are not the primary mover. The correct answer is the Lats (B).",
+      "B": "Correct! The latissimus dorsi are the large muscles on either side of your back and are the primary muscle being worked when you pull the bar down.",
+      "C": "Incorrect. Triceps are a pushing muscle and are not engaged during a pulling movement like the lat pulldown. The correct answer is the Lats. (B)",
+      "D": "Incorrect. Front delts are mainly worked during pressing movements like the overhead press. The correct answer is the Lats. (B)"
+    }
+  },
+  {
+    "id": 2,
+    "question": "What is the most common mistake when doing face pulls?",
+    "options": {
+      "A": "Gripping Too Wide",
+      "B": "Using Too Much Weight",
+      "C": "Letting Your Elbows Drop",
+      "D": "Pulling Too Fast"
+    },
+    "correct": "C",
+    "explanations": {
+      "A": "Not the main issue. Grip width has minimal impact on face pull effectiveness. The correct answer is letting your elbows drop. (C)",
+      "B": "While using too much weight is always a concern, it is not the most common mistake specific to face pulls. The correct answer is letting your elbows drop. (C)",
+      "C": "Correct! Keeping your elbows high and parallel to the ground is essential. When they drop, the rear delts stop working and your biceps take over instead.",
+      "D": "Speed matters but is not the defining mistake for this exercise. The correct answer is letting your elbows drop. (C)"
+    }
+  },
+  {
+    "id": 3,
+    "question": "Which exercise best isolates the biceps?",
+    "options": {
+      "A": "Overhead Press",
+      "B": "Tricep Pushdown",
+      "C": "Face Pull",
+      "D": "Preacher Curl"
+    },
+    "correct": "D",
+    "explanations": {
+      "A": "Incorrect. The overhead press primarily works your shoulders and triceps. The correct answer is the preacher curl. (D)",
+      "B": "Incorrect. This isolates the triceps, which are on the opposite side of your arm. The correct answer is the preacher curl. (D)",
+      "C": "Incorrect. Face pulls target the rear delts and traps, not the biceps. The correct answer is the preacher curl. (D)",
+      "D": "Correct! The preacher bench locks your arms in place so you cannot use momentum, forcing your biceps to do all the work."
+    }
+  },
+  {
+    "id": 4,
+    "question": "When doing the tricep pushdown, where should your elbows be the entire time?",
+    "options": {
+      "A": "Flared Out to the Sides",
+      "B": "Pinned To Your Sides",
+      "C": "Raised Above Your Shoulder",
+      "D": "Pointing Behind You"
+    },
+    "correct": "B",
+    "explanations": {
+      "A": "Incorrect. Flaring your elbows out shifts tension away from your triceps and puts stress on your shoulders. The correct answer is pinned to your sides. (B)",
+      "B": "Correct! Keeping your elbows locked at your sides throughout the entire movement ensures the triceps are doing all the work.",
+      "C": "Incorrect. This would completely change the movement and take all tension off your triceps. The correct answer is pinned to your sides. (B)",
+      "D": "Incorrect. Letting your elbows drift back means you are using your back and shoulders instead of your triceps. The correct answer is pinned to your sides. (B)"
+    }
+  },
+  {
+    "id": 5,
+    "question": "Which exercise targets the front and side delts, triceps, and upper chest all at once?",
+    "options": {
+      "A": "Face Pull",
+      "B": "Lat Pulldown",
+      "C": "Overhead Press",
+      "D": "Preacher Curl"
+    },
+    "correct": "C",
+    "explanations": {
+      "A": "Incorrect. Face pulls target the rear delts and traps on the back side of your body. The correct answer is the overhead press. (C)",
+      "B": "Incorrect. The lat pulldown targets your back and biceps, not your pressing muscles. The correct answer is the overhead press. (C)",
+      "C": "Correct! Because you are pressing a weight directly overhead, you engage the front and side deltoids, triceps, and upper chest all in one compound movement.",
+      "D": "Incorrect. The preacher curl is a single joint movement that only targets the biceps. The correct answer is the overhead press. (C)"
+    }
+  }
+]

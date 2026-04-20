@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Quiz Time – Mastering the Pull{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center text-center mt-5">
+  <div class="col-md-8">
+
+    <h1 class="display-4 fw-bold">QUIZ TIME</h1>
+
+    <p class="lead mt-3">
+      You just learned 5 upper body exercises. Now let's see how much you
+      retained. For each question, click on the best answer.
+    </p>
+    <p class="text-muted">Don't worry about being wrong — we will teach you!!</p>
+
+    <a href="{{ url_for('quiz', question_num=1) }}" class="btn btn-warning btn-lg px-5 mt-3">
+      Begin QUIZ!
+    </a>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}Question {{ question_num }} – Quiz{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12">
+
+    <!-- Progress indicator -->
+    <p class="text-muted">Question {{ question_num }} of {{ total_questions }}</p>
+    <div class="progress mb-4" style="height: 8px;">
+      <div
+        class="progress-bar bg-warning"
+        style="width: {{ (question_num / total_questions * 100)|int }}%;"
+      ></div>
+    </div>
+
+    <div class="row">
+
+      <!-- Left: placeholder image -->
+      <div class="col-md-5">
+        <div
+          class="border rounded d-flex align-items-center justify-content-center bg-light"
+          style="height: 260px;"
+        >
+          <span class="text-muted">[Question image placeholder]</span>
+        </div>
+      </div>
+
+      <!-- Right: question + choices -->
+      <div class="col-md-7">
+
+        <div class="alert alert-warning fw-semibold">
+          Question {{ question_num }}: {{ question.question }}
+        </div>
+
+        <!-- Answer buttons — one per option letter -->
+        <div id="answer-choices">
+          {% for letter, text in question.options.items() %}
+          <button
+            class="btn btn-outline-secondary w-100 text-start mb-2 answer-btn"
+            data-letter="{{ letter }}"
+            {% if already_answered %}disabled{% endif %}
+          >
+            {{ letter }}) {{ text }}
+          </button>
+          {% endfor %}
+        </div>
+
+        <!-- Feedback box (hidden until an answer is chosen) -->
+        <div id="feedback-box" class="border rounded p-3 mt-3 bg-light" style="display:none;">
+          <p id="feedback-text" class="mb-0"></p>
+        </div>
+
+        <!-- Next button (hidden until an answer is chosen) -->
+        <div class="text-end mt-3">
+          <a id="next-btn" href="#" class="btn btn-primary" style="display:none;">
+            Next Question &rarr;
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- If user already answered this question (e.g. navigated back), show state -->
+    {% if already_answered %}
+    <script>
+      // Re-render the already-answered state on page load
+      $(function () {
+        var chosen  = "{{ chosen }}";
+        var correct = "{{ question.correct }}";
+        var feedback = {{ question.explanations | tojson }};
+        var nextUrl  = "{{ url_for('quiz', question_num=question_num + 1) if question_num < total_questions else url_for('results') }}";
+
+        applyFeedback(chosen, correct, feedback[chosen], nextUrl);
+      });
+    </script>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+$(function () {
+
+  var QUESTION_NUM = {{ question_num }};
+  var SUBMIT_URL   = "{{ url_for('submit_answer') }}";
+
+  // Prevent double-submission
+  var answered = {{ 'true' if already_answered else 'false' }};
+
+  $('.answer-btn').on('click', function () {
+    if (answered) return;
+    answered = true;
+
+    var chosen = $(this).data('letter');
+
+    // Disable all buttons while we wait for the server
+    $('.answer-btn').prop('disabled', true);
+
+    $.ajax({
+      url        : SUBMIT_URL,
+      method     : 'POST',
+      contentType: 'application/json',
+      data       : JSON.stringify({ question_num: QUESTION_NUM, answer: chosen }),
+      success    : function (resp) {
+        applyFeedback(chosen, resp.correct, resp.feedback, resp.next_url);
+      },
+      error      : function () {
+        alert('Something went wrong submitting your answer. Please try again.');
+        answered = false;
+        $('.answer-btn').prop('disabled', false);
+      }
+    });
+  });
+
+});
+
+/**
+ * Colour the answer buttons and reveal feedback + next-button.
+ * Green  = correct answer
+ * Red    = the wrong choice the user picked
+ */
+function applyFeedback(chosen, correct, feedbackText, nextUrl) {
+  $('.answer-btn').each(function () {
+    var letter = $(this).data('letter');
+    $(this).removeClass('btn-outline-secondary btn-success btn-danger');
+    if (letter === correct) {
+      $(this).addClass('btn-success');
+    } else if (letter === chosen && chosen !== correct) {
+      $(this).addClass('btn-danger');
+    } else {
+      $(this).addClass('btn-outline-secondary');
+    }
+    $(this).prop('disabled', true);
+  });
+
+  $('#feedback-text').text(feedbackText);
+  $('#feedback-box').show();
+
+  $('#next-btn').attr('href', nextUrl).show();
+}
+</script>
+{% endblock %}
