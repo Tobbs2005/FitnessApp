@@ -14,17 +14,33 @@
       ></div>
     </div>
 
+    <div class="mb-2">
+      <a href="{{ url_for('exercises') }}" class="btn btn-sm btn-outline-secondary">
+        &larr; Back to Exercises
+      </a>
+    </div>
     <h2 class="fw-bold">{{ exercise.name }}</h2>
 
     <div class="row mt-3">
 
-      <!-- Left: placeholder image area (Toby will add real images) -->
+      <!-- Left: exercise diagram -->
       <div class="col-md-5">
         <div
-          class="border rounded d-flex align-items-center justify-content-center bg-light"
+          class="border rounded overflow-hidden d-flex align-items-center justify-content-center bg-light"
           style="height: 260px;"
         >
-          <span class="text-muted">[Exercise image placeholder]</span>
+          {% if media %}
+          <img
+            src="{{ url_for('static', filename=media) }}"
+            alt="{{ exercise.name }}"
+            class="img-fluid"
+            style="max-height: 100%;"
+          />
+          {% else %}
+          <span class="text-muted text-center p-2">
+            Add <code>static/images/exercises/exercise-{{ exercise.id }}.gif</code>
+          </span>
+          {% endif %}
         </div>
       </div>
 
@@ -60,8 +76,8 @@
         &larr; Previous
       </a>
       {% else %}
-      <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">
-        &larr; Home
+      <a href="{{ url_for('exercises') }}" class="btn btn-outline-secondary">
+        &larr; Exercises
       </a>
       {% endif %}
 

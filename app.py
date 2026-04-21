@@ -25,6 +25,29 @@ with open(os.path.join(BASE_DIR, 'data', 'quiz.json')) as f:
 TOTAL_LESSONS = len(EXERCISES)
 TOTAL_QUESTIONS = len(QUIZ)
 
+
+def _first_existing_media(*relative_paths):
+    """Return the first relative static path whose file exists, else None."""
+    for rel in relative_paths:
+        abs_path = os.path.join(BASE_DIR, 'static', rel)
+        if os.path.exists(abs_path):
+            return rel
+    return None
+
+
+def exercise_media(exercise_id):
+    return _first_existing_media(
+        f'images/exercises/exercise-{exercise_id}.gif',
+        f'images/exercises/exercise-{exercise_id}.png',
+    )
+
+
+def question_media(question_num):
+    return _first_existing_media(
+        f'images/questions/question-{question_num}.gif',
+        f'images/questions/question-{question_num}.png',
+    )
+
 # ---------------------------------------------------------------------------
 # Database models
 # ---------------------------------------------------------------------------
@@ -95,7 +118,18 @@ def start():
     session['answers'] = {}   # {str(question_num): chosen_letter}
     session['score']   = 0
 
-    return redirect(url_for('learn', lesson_num=1))
+    return redirect(url_for('exercises'))
+
+
+@app.route('/exercises')
+def exercises():
+    items = []
+    for ex in EXERCISES:
+        items.append({**ex, 'media': exercise_media(ex['id'])})
+    return render_template(
+        'exercises.html',
+        exercises=items,
+    )
 
 
 @app.route('/learn/<int:lesson_num>')
@@ -111,6 +145,7 @@ def learn(lesson_num):
         exercise=exercise,
         lesson_num=lesson_num,
         total_lessons=TOTAL_LESSONS,
+        media=exercise_media(exercise['id']),
     )
 
 
@@ -137,6 +172,7 @@ def quiz(question_num):
         total_questions=TOTAL_QUESTIONS,
         already_answered=already_answered,
         chosen=chosen,
+        media=question_media(question_num),
     )
 
 

@@ -16,13 +16,24 @@
 
     <div class="row">
 
-      <!-- Left: placeholder image -->
+      <!-- Left: question diagram -->
       <div class="col-md-5">
         <div
-          class="border rounded d-flex align-items-center justify-content-center bg-light"
+          class="border rounded overflow-hidden d-flex align-items-center justify-content-center bg-light"
           style="height: 260px;"
         >
-          <span class="text-muted">[Question image placeholder]</span>
+          {% if media %}
+          <img
+            src="{{ url_for('static', filename=media) }}"
+            alt="Question {{ question_num }} image"
+            class="img-fluid"
+            style="max-height: 100%;"
+          />
+          {% else %}
+          <span class="text-muted text-center p-2">
+            Add <code>static/images/questions/question-{{ question_num }}.gif</code>
+          </span>
+          {% endif %}
         </div>
       </div>
 

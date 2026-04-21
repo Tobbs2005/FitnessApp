@@ -11,6 +11,16 @@
       body muscle groups and the key exercises that target each one.
     </p>
 
+    <div class="border rounded d-flex align-items-center justify-content-center bg-light mx-auto" style="height: 260px; max-width: 520px;">
+      <img
+        src="{{ url_for('static', filename='images/gif/prototype-exercises.gif') }}"
+        alt="Exercise preview"
+        style="max-width: 100%; max-height: 100%;"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      />
+      <span class="text-muted" style="display:none;">[Preview GIF unavailable]</span>
+    </div>
+
     <!-- Start creates a new DB session and goes to lesson 1 -->
     <form action="{{ url_for('start') }}" method="POST" class="mt-4">
       <button type="submit" class="btn btn-warning btn-lg px-5">
