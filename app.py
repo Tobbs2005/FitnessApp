@@ -35,11 +35,55 @@ def _first_existing_media(*relative_paths):
     return None
 
 
+_EXERCISE_GIFS = {
+    1: 'images/gif/Lat-Pulldown.gif',
+    2: 'images/gif/Face-Pull.gif',
+    3: 'images/gif/Standing-Dumbbell-Overhead-Press.gif',
+    4: 'images/gif/Z-Bar-Preacher-Curl.gif',
+    5: 'images/gif/Pushdown.gif',
+}
+
 def exercise_media(exercise_id):
+    gif = _EXERCISE_GIFS.get(exercise_id)
+    if gif:
+        return _first_existing_media(gif)
     return _first_existing_media(
         f'images/exercises/exercise-{exercise_id}.gif',
         f'images/exercises/exercise-{exercise_id}.png',
     )
+
+
+def exercise_diagram(exercise_id):
+    return _first_existing_media(f'images/exercises/exercise-{exercise_id}.png')
+
+
+# lx/ly = label position (%), tx/ty = arrow tip on the muscle (%)
+# lx < 50 → label on left side; lx > 50 → label on right side
+_MUSCLE_LABELS = {
+    1: [  # Lat Pulldown
+        {'name': 'Lats',       'lx': 8,  'ly': 80, 'tx': 47, 'ty': 50},
+        {'name': 'Rear Delts', 'lx': 10,  'ly': 44, 'tx': 47, 'ty': 38},
+        {'name': 'Biceps',     'lx': 84, 'ly': 18, 'tx': 65, 'ty': 36},
+    ],
+    2: [  # Face Pulls
+        {'name': 'Rear Delts',   'lx': 6,  'ly': 68, 'tx': 63, 'ty': 24},
+        {'name': 'Traps',        'lx': 48, 'ly': 92, 'tx': 73, 'ty': 28},
+        {'name': 'Rotator Cuff', 'lx': 78, 'ly': 12, 'tx': 68, 'ty': 29},
+    ],
+    3: [  # Overhead Press
+        {'name': 'Front Delts', 'lx': 6,  'ly': 82, 'tx': 46, 'ty': 37},
+        {'name': 'Side Delts',  'lx': 6,  'ly': 50, 'tx': 42, 'ty': 36},
+        {'name': 'Triceps',     'lx': 84, 'ly': 44, 'tx': 57, 'ty': 44},
+        {'name': 'Upper Chest', 'lx': 82, 'ly': 76, 'tx': 48, 'ty': 38},
+    ],
+    4: [  # Preacher Curl
+        {'name': 'Brachialis',     'lx': 82, 'ly': 74, 'tx': 49, 'ty': 33},
+        {'name': 'Biceps', 'lx': 6,  'ly': 88, 'tx': 40, 'ty': 35},
+    ],
+    5: [  # Tricep Pushdown
+        {'name': 'Triceps', 'lx': 6, 'ly': 80, 'tx': 25, 'ty': 39},
+    ],
+}
 
 
 def question_media(question_num):
@@ -146,6 +190,8 @@ def learn(lesson_num):
         lesson_num=lesson_num,
         total_lessons=TOTAL_LESSONS,
         media=exercise_media(exercise['id']),
+        diagram=exercise_diagram(exercise['id']),
+        muscle_labels=_MUSCLE_LABELS.get(exercise['id'], []),
     )
 
 

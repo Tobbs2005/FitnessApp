@@ -17,7 +17,8 @@
 <!-- ── Nav ──────────────────────────────────────────────────────────── -->
 <nav class="navbar navbar-expand navbar-dark bg-secondary">
   <div class="container-fluid">
-    <div class="navbar-nav">
+    <a class="navbar-brand fw-bold" href="{{ url_for('home') }}">FitnessBuddy</a>
+    <div class="navbar-nav ms-auto">
       <a class="nav-link" href="{{ url_for('home') }}">HOME</a>
       <a class="nav-link" href="{{ url_for('exercises') }}">EXERCISES</a>
       <a class="nav-link" href="{{ url_for('quiz_intro') }}">QUIZ</a>

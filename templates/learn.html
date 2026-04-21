@@ -21,12 +21,14 @@
     </div>
     <h2 class="fw-bold">{{ exercise.name }}</h2>
 
-    <div class="row mt-3">
+    <div class="row mt-3 align-items-start">
 
-      <!-- Left: exercise diagram -->
+      <!-- Left: GIF + muscle diagram -->
       <div class="col-md-5">
+
+        <!-- GIF -->
         <div
-          class="border rounded overflow-hidden d-flex align-items-center justify-content-center bg-light"
+          class="border rounded overflow-hidden d-flex align-items-center justify-content-center bg-light mb-3"
           style="height: 260px;"
         >
           {% if media %}
@@ -37,11 +39,45 @@
             style="max-height: 100%;"
           />
           {% else %}
-          <span class="text-muted text-center p-2">
-            Add <code>static/images/exercises/exercise-{{ exercise.id }}.gif</code>
-          </span>
+          <span class="text-muted text-center p-2">No GIF available</span>
           {% endif %}
         </div>
+
+        <!-- Muscle diagram with CSS/SVG arrow overlay -->
+        {% if diagram %}
+        <div class="border rounded bg-light p-2 mt-1" style="position: relative; display: block; max-width: 65%; margin: 0 auto;">
+          <img
+            src="{{ url_for('static', filename=diagram) }}"
+            alt="{{ exercise.name }} muscle diagram"
+            style="width: 100%; height: auto; display: block;"
+          />
+          <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible;">
+            <defs>
+              <marker id="arrowhead" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+                <polygon points="0 0, 7 2.5, 0 5" fill="#e85d04"/>
+              </marker>
+            </defs>
+            {% for m in muscle_labels %}
+            <line
+              x1="{{ m.lx }}%" y1="{{ m.ly }}%"
+              x2="{{ m.tx }}%" y2="{{ m.ty }}%"
+              stroke="#e85d04" stroke-width="1.5"
+              marker-end="url(#arrowhead)"
+            />
+            <text
+              x="{{ m.lx }}%" y="{{ m.ly }}%"
+              fill="#e85d04"
+              font-size="13"
+              font-weight="bold"
+              font-family="sans-serif"
+              text-anchor="{% if m.lx > 50 %}end{% else %}start{% endif %}"
+              dy="-6"
+            >{{ m.name }}</text>
+            {% endfor %}
+          </svg>
+        </div>
+        {% endif %}
+
       </div>
 
       <!-- Right: content box -->

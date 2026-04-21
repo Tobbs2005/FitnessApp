@@ -1,13 +1,10 @@
 :root {
-  --panel-bg: rgba(255, 255, 255, 0.92);
-  --panel-border: rgba(209, 213, 219, 0.9);
+  --panel-bg: rgba(255, 255, 255, 0.95);
+  --panel-border: rgba(180, 200, 220, 0.9);
 }
 
 body.app-body {
-  background-image: url("../images/background.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(160deg, #c8dff0 0%, #daeaf7 45%, #cfe4f5 100%);
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -19,12 +16,16 @@ body.app-body {
 
 .text-muted,
 .text-secondary {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #3a4a5a !important;
 }
 
 .card-text.text-muted,
 .card .text-muted {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: #4a5d6e !important;
+}
+
+.navbar.bg-secondary {
+  background-color: #1e3a52 !important;
 }
 
 .navbar .nav-link {
@@ -38,34 +39,34 @@ body.app-body {
 .content-panel,
 .hero-panel,
 #feedback-box {
-  background: #0b1f3a !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(100, 150, 190, 0.3) !important;
   border-radius: 12px;
 }
 
-/* Navy panel text */
+/* Panel text */
 .content-panel,
 .hero-panel,
 #feedback-box {
-  color: #ffffff;
+  color: #1a2b3c;
 }
 
 .content-panel strong,
 .hero-panel strong,
 #feedback-box strong {
-  color: #ffffff;
+  color: #1a2b3c;
 }
 
 .content-panel a,
 .hero-panel a,
 #feedback-box a {
-  color: rgba(255, 255, 255, 0.95);
+  color: #1e3a52;
 }
 
-/* Navy cards */
+/* Cards */
 .card {
-  background: #0b1f3a !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background: #1e3a52 !important;
+  border: 1px solid rgba(100, 160, 210, 0.3) !important;
   border-radius: 12px;
 }
 
@@ -76,7 +77,7 @@ body.app-body {
 }
 
 .card .text-muted {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .card .border-bottom {
