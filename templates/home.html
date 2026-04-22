@@ -7,27 +7,72 @@
 
     <h1 class="display-4 fw-bold">MASTERING THE PULL</h1>
     <p class="lead mt-3">
-      In the next few minutes, you'll get familiar with the five major upper
+      In the next few minutes, you'll get familiar with the major upper
       body muscle groups and the key exercises that target each one.
     </p>
 
-    <div class="border rounded d-flex align-items-center justify-content-center bg-light mx-auto" style="height: 260px; max-width: 520px;">
+    <!-- GIF slideshow -->
+    <div class="mx-auto mt-4 rounded"
+         style="height: 280px; max-width: 480px; background:#ffffff; border: 1px solid rgba(100,160,210,0.3); border-radius: 12px; overflow:hidden; position:relative;">
+      {% set gifs = [
+        'images/gif/Lat-Pulldown.gif',
+        'images/gif/Face-Pull.gif',
+        'images/gif/Standing-Dumbbell-Overhead-Press.gif',
+        'images/gif/Z-Bar-Preacher-Curl.gif',
+        'images/gif/Pushdown.gif',
+        'images/gif/Close-Grip-Cable-Row.gif',
+        'images/gif/Barbell-Bent-Over-Row.gif',
+        'images/gif/Dumbbell-Lateral-Raise.gif',
+        'images/gif/Hammer-Curl.gif'
+      ] %}
+      {% for gif in gifs %}
       <img
-        src="{{ url_for('static', filename='images/gif/prototype-exercises.gif') }}"
+        class="home-gif"
+        src="{{ url_for('static', filename=gif) }}"
         alt="Exercise preview"
-        style="max-width: 100%; max-height: 100%;"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        data-index="{{ loop.index0 }}"
+        style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; background:#ffffff; opacity:0; transition: opacity 1s ease;"
       />
-      <span class="text-muted" style="display:none;">[Preview GIF unavailable]</span>
+      {% endfor %}
     </div>
 
-    <!-- Start creates a new DB session and goes to lesson 1 -->
-    <form action="{{ url_for('start') }}" method="POST" class="mt-4">
-      <button type="submit" class="btn btn-warning btn-lg px-5">
+    <!-- Start creates a new DB session -->
+    <form action="{{ url_for('start') }}" method="POST" class="mt-4 mx-auto" style="max-width: 480px;">
+      <button type="submit" class="btn btn-warning btn-lg w-100">
         CLICK TO BEGIN YOUR WEIGHT LIFTING JOURNEY
       </button>
     </form>
 
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  var gifs     = document.querySelectorAll('.home-gif');
+  var total    = gifs.length;
+  var current  = 0;
+  var SHOW_MS  = 3000;   // how long each GIF is visible
+  var FADE_MS  = 1000;   // must match the CSS transition duration
+
+  function showNext() {
+    // fade out current
+    gifs[current].style.opacity = '0';
+
+    current = (current + 1) % total;
+
+    // fade in next after the fade-out completes
+    setTimeout(function () {
+      gifs[current].style.opacity = '1';
+    }, FADE_MS);
+  }
+
+  // show first GIF immediately
+  gifs[0].style.opacity = '1';
+
+  // cycle every SHOW_MS
+  setInterval(showNext, SHOW_MS);
+})();
+</script>
 {% endblock %}

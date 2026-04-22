@@ -1,15 +1,13 @@
 :root {
-  --panel-bg: rgba(255, 255, 255, 0.95);
-  --panel-border: rgba(180, 200, 220, 0.9);
+  --blue-card: rgba(200, 223, 240, 0.55);
+  --blue-card-border: rgba(100, 160, 210, 0.35);
 }
 
 body.app-body {
-  background: linear-gradient(160deg, #c8dff0 0%, #daeaf7 45%, #cfe4f5 100%);
-  background-attachment: fixed;
+  background: #ffffff;
   min-height: 100vh;
 }
 
-/* Make main content readable over background */
 .container {
   position: relative;
 }
@@ -36,34 +34,7 @@ body.app-body {
   color: #ffffff !important;
 }
 
-.content-panel,
-.hero-panel,
-#feedback-box {
-  background: #ffffff !important;
-  border: 1px solid rgba(100, 150, 190, 0.3) !important;
-  border-radius: 12px;
-}
-
-/* Panel text */
-.content-panel,
-.hero-panel,
-#feedback-box {
-  color: #1a2b3c;
-}
-
-.content-panel strong,
-.hero-panel strong,
-#feedback-box strong {
-  color: #1a2b3c;
-}
-
-.content-panel a,
-.hero-panel a,
-#feedback-box a {
-  color: #1e3a52;
-}
-
-/* Cards */
+/* Exercise / Bootstrap cards (exercises grid) */
 .card {
   background: #1e3a52 !important;
   border: 1px solid rgba(100, 160, 210, 0.3) !important;
@@ -84,10 +55,115 @@ body.app-body {
   border-bottom-color: rgba(255, 255, 255, 0.14) !important;
 }
 
-.media-block {
-  border: 1px solid var(--panel-border);
+/* ── Learn page info cards ─────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-card {
+  opacity: 0;
+  animation: fadeInUp 0.45s ease forwards;
+}
+
+.learn-card {
+  background: var(--blue-card);
+  border: 1px solid var(--blue-card-border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.6rem;
+  color: #1a2b3c;
+  font-size: 0.95rem;
+}
+
+.mistake-card {
+  background: rgba(220, 53, 69, 0.08);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1e3a52;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Feedback / quiz panels */
+#feedback-box {
+  background: var(--blue-card) !important;
+  border: 1px solid var(--blue-card-border) !important;
+  border-radius: 10px;
+  color: #1a2b3c;
+}
+
+/* ── Exercise toggle cards ─────────────────────────────────────── */
+
+.ex-card {
+  display: block;
+  background: #1e3a52;
   border-radius: 12px;
-  background: rgba(249, 250, 251, 0.9);
+  padding: 1.25rem 1.25rem 1rem;
+  color: #ffffff;
+  min-height: 110px;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.ex-card:hover {
+  background: #b8d9f0;
+  color: #1a2b3c;
+  box-shadow: 0 4px 16px rgba(30, 58, 82, 0.15);
+}
+
+.ex-card-gif {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  display: block;
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+  background: #ffffff;
+  border-radius: 8px;
+  transition: opacity 0.35s ease, max-height 0.4s ease, margin-bottom 0.35s ease;
+}
+
+.ex-card:hover .ex-card-gif {
+  opacity: 1;
+  max-height: 150px;
+  margin-bottom: 0.75rem;
+}
+
+.ex-card-muscles {
+  opacity: 0.75;
+  transition: color 0.3s ease;
+}
+
+.ex-card:hover .ex-card-muscles {
+  opacity: 1;
+  color: #2d4f6a;
+}
+
+/* ── Quiz fade-in ──────────────────────────────────────────────── */
+
+.quiz-fade {
+  opacity: 0;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+/* ── Misc ──────────────────────────────────────────────────────── */
+
+.media-block {
+  border: 1px solid var(--blue-card-border);
+  border-radius: 12px;
+  background: #f0f6fb;
   display: flex;
   align-items: center;
   justify-content: center;

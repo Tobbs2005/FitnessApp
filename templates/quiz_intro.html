@@ -8,14 +8,19 @@
     <h1 class="display-4 fw-bold">QUIZ TIME</h1>
 
     <p class="lead mt-3">
-      You just learned 5 upper body exercises. Now let's see how much you
+      You just learned 9 upper body exercises. Now let's see how much you
       retained. For each question, click on the best answer.
     </p>
     <p class="text-muted">Don't worry about being wrong — we will teach you!!</p>
 
-    <a href="{{ url_for('quiz', question_num=1) }}" class="btn btn-warning btn-lg px-5 mt-3">
-      Begin QUIZ!
-    </a>
+    <div class="d-flex justify-content-center gap-3 mt-3">
+      <a href="{{ url_for('exercises') }}" class="btn btn-outline-secondary btn-lg px-4">
+        &larr; Review Exercises
+      </a>
+      <a href="{{ url_for('quiz', question_num=1) }}" class="btn btn-warning btn-lg px-5">
+        Begin QUIZ!
+      </a>
+    </div>
 
   </div>
 </div>

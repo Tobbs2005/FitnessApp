@@ -41,6 +41,10 @@ _EXERCISE_GIFS = {
     3: 'images/gif/Standing-Dumbbell-Overhead-Press.gif',
     4: 'images/gif/Z-Bar-Preacher-Curl.gif',
     5: 'images/gif/Pushdown.gif',
+    6: 'images/gif/Close-Grip-Cable-Row.gif',
+    7: 'images/gif/Barbell-Bent-Over-Row.gif',
+    8: 'images/gif/Dumbbell-Lateral-Raise.gif',
+    9: 'images/gif/Hammer-Curl.gif',
 }
 
 def exercise_media(exercise_id):
@@ -275,6 +279,13 @@ def submit_answer():
         feedback      = feedback,
         next_url      = next_url,
     )
+
+
+@app.route('/retake', methods=['POST'])
+def retake():
+    session['answers'] = {}
+    session['score'] = 0
+    return redirect(url_for('quiz_intro'))
 
 
 @app.route('/results')

@@ -58,5 +58,53 @@
       "Slowly let the bar rise back up, keeping your elbows locked in place"
     ],
     "common_mistake": "Letting your elbows flare out or move forward as you push down. Keep them pinned to your sides the whole time or you take the tension off your triceps."
+  },
+  {
+    "id": 6,
+    "name": "Close Grip Cable Row",
+    "muscles": ["Lats", "Rhomboids", "Biceps", "Rear Delts"],
+    "steps": [
+      "Sit at the cable row machine and grip the close grip handle with both hands",
+      "Keep your back straight and your chest up as you pull the handle toward your stomach",
+      "Squeeze your shoulder blades together at the end of the movement",
+      "Slowly extend your arms back to the starting position with control"
+    ],
+    "common_mistake": "Rounding your lower back as you pull. Keep your torso upright and avoid leaning too far forward or backward during the movement."
+  },
+  {
+    "id": 7,
+    "name": "Barbell Bent Over Row",
+    "muscles": ["Lats", "Rhomboids", "Traps", "Biceps"],
+    "steps": [
+      "Stand with feet shoulder width apart and hinge at the hips until your torso is roughly parallel to the floor",
+      "Grip the barbell slightly wider than shoulder width with palms facing down",
+      "Pull the bar toward your lower chest, driving your elbows back and up",
+      "Slowly lower the bar back to the starting position with control"
+    ],
+    "common_mistake": "Using your lower back to yank the bar up instead of pulling with your back muscles. Keep your core braced and your torso still throughout the movement."
+  },
+  {
+    "id": 8,
+    "name": "Dumbbell Lateral Raise",
+    "muscles": ["Side Delts", "Traps"],
+    "steps": [
+      "Stand with a dumbbell in each hand at your sides, palms facing inward",
+      "With a slight bend in your elbows, raise both arms out to the sides until they are parallel to the floor",
+      "Pause briefly at the top of the movement",
+      "Slowly lower the dumbbells back down to your sides with control"
+    ],
+    "common_mistake": "Using momentum to swing the weights up instead of lifting with your side delts. Use a lighter weight and focus on a slow controlled raise rather than swinging."
+  },
+  {
+    "id": 9,
+    "name": "Hammer Curl",
+    "muscles": ["Biceps", "Brachialis", "Brachioradialis"],
+    "steps": [
+      "Stand holding a dumbbell in each hand with your palms facing inward toward your body",
+      "Keep your elbows tucked at your sides and curl both dumbbells up toward your shoulders",
+      "Pause at the top and squeeze your biceps",
+      "Slowly lower the dumbbells back to the starting position with control"
+    ],
+    "common_mistake": "Swinging your elbows forward or using your back to help lift the weight. Keep your elbows pinned to your sides throughout the entire movement."
   }
 ]

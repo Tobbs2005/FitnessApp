@@ -14,74 +14,77 @@
       ></div>
     </div>
 
-    <div class="row">
+    <!-- Question -->
+    <div class="alert alert-warning fw-semibold mb-3 quiz-fade" style="animation-delay: 0.05s;">
+      Question {{ question_num }}: {{ question.question }}
+    </div>
 
-      <!-- Left: question diagram -->
-      <div class="col-md-5">
+    <!-- Answer buttons -->
+    <div id="answer-choices" class="mb-3">
+      {% for letter, text in question.options.items() %}
+      <button
+        class="btn btn-outline-secondary w-100 text-start mb-2 answer-btn quiz-fade"
+        data-letter="{{ letter }}"
+        style="animation-delay: {{ 0.1 + loop.index * 0.08 }}s;"
+        {% if already_answered %}disabled{% endif %}
+      >
+        {{ letter }}) {{ text }}
+      </button>
+      {% endfor %}
+    </div>
+
+    <!-- Feedback box (shown after answering) -->
+    <div id="feedback-box" class="border rounded p-3 bg-light mb-3" style="display:none;">
+      <p id="feedback-text" class="mb-0"></p>
+    </div>
+
+    <!-- Hint button + image (image hidden until button clicked) -->
+    <div id="hint-area">
+      <button id="hint-btn" class="btn btn-outline-info btn-sm mb-3">
+        Show Hint Image
+      </button>
+      <div id="hint-image" style="display:none;">
+        {% if media %}
         <div
-          class="border rounded overflow-hidden d-flex align-items-center justify-content-center bg-light"
-          style="height: 260px;"
+          class="border rounded overflow-hidden d-flex align-items-center justify-content-center bg-light mb-3"
+          style="max-width: 420px; height: 240px;"
         >
-          {% if media %}
           <img
             src="{{ url_for('static', filename=media) }}"
-            alt="Question {{ question_num }} image"
+            alt="Question {{ question_num }} hint image"
             class="img-fluid"
             style="max-height: 100%;"
           />
-          {% else %}
-          <span class="text-muted text-center p-2">
-            Add <code>static/images/questions/question-{{ question_num }}.gif</code>
+        </div>
+        {% else %}
+        <div
+          class="border rounded d-flex align-items-center justify-content-center bg-light text-muted mb-3"
+          style="max-width: 420px; height: 160px;"
+        >
+          <span class="text-center p-2 small">
+            Placeholder — add<br>
+            <code>static/images/questions/question-{{ question_num }}.png</code>
           </span>
-          {% endif %}
         </div>
-      </div>
-
-      <!-- Right: question + choices -->
-      <div class="col-md-7">
-
-        <div class="alert alert-warning fw-semibold">
-          Question {{ question_num }}: {{ question.question }}
-        </div>
-
-        <!-- Answer buttons — one per option letter -->
-        <div id="answer-choices">
-          {% for letter, text in question.options.items() %}
-          <button
-            class="btn btn-outline-secondary w-100 text-start mb-2 answer-btn"
-            data-letter="{{ letter }}"
-            {% if already_answered %}disabled{% endif %}
-          >
-            {{ letter }}) {{ text }}
-          </button>
-          {% endfor %}
-        </div>
-
-        <!-- Feedback box (hidden until an answer is chosen) -->
-        <div id="feedback-box" class="border rounded p-3 mt-3 bg-light" style="display:none;">
-          <p id="feedback-text" class="mb-0"></p>
-        </div>
-
-        <!-- Next button (hidden until an answer is chosen) -->
-        <div class="text-end mt-3">
-          <a id="next-btn" href="#" class="btn btn-primary" style="display:none;">
-            Next Question &rarr;
-          </a>
-        </div>
-
+        {% endif %}
       </div>
     </div>
 
-    <!-- If user already answered this question (e.g. navigated back), show state -->
+    <!-- Next button -->
+    <div class="text-end mt-2">
+      <a id="next-btn" href="#" class="btn btn-primary" style="display:none;">
+        {% if question_num < total_questions %}Next Question &rarr;{% else %}See Results &rarr;{% endif %}
+      </a>
+    </div>
+
+    <!-- Re-render answered state on back-navigation -->
     {% if already_answered %}
     <script>
-      // Re-render the already-answered state on page load
       $(function () {
-        var chosen  = "{{ chosen }}";
-        var correct = "{{ question.correct }}";
+        var chosen   = "{{ chosen }}";
+        var correct  = "{{ question.correct }}";
         var feedback = {{ question.explanations | tojson }};
         var nextUrl  = "{{ url_for('quiz', question_num=question_num + 1) if question_num < total_questions else url_for('results') }}";
-
         applyFeedback(chosen, correct, feedback[chosen], nextUrl);
       });
     </script>
@@ -98,17 +101,13 @@ $(function () {
 
   var QUESTION_NUM = {{ question_num }};
   var SUBMIT_URL   = "{{ url_for('submit_answer') }}";
-
-  // Prevent double-submission
-  var answered = {{ 'true' if already_answered else 'false' }};
+  var answered     = {{ 'true' if already_answered else 'false' }};
 
   $('.answer-btn').on('click', function () {
     if (answered) return;
     answered = true;
 
     var chosen = $(this).data('letter');
-
-    // Disable all buttons while we wait for the server
     $('.answer-btn').prop('disabled', true);
 
     $.ajax({
@@ -127,13 +126,15 @@ $(function () {
     });
   });
 
+  $('#hint-btn').on('click', function () {
+    $('#hint-image').slideToggle(200);
+    $(this).text(
+      $('#hint-image').is(':visible') ? 'Hide Hint Image' : 'Show Hint Image'
+    );
+  });
+
 });
 
-/**
- * Colour the answer buttons and reveal feedback + next-button.
- * Green  = correct answer
- * Red    = the wrong choice the user picked
- */
 function applyFeedback(chosen, correct, feedbackText, nextUrl) {
   $('.answer-btn').each(function () {
     var letter = $(this).data('letter');
@@ -150,7 +151,6 @@ function applyFeedback(chosen, correct, feedbackText, nextUrl) {
 
   $('#feedback-text').text(feedbackText);
   $('#feedback-box').show();
-
   $('#next-btn').attr('href', nextUrl).show();
 }
 </script>
