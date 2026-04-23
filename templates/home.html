@@ -2,18 +2,35 @@
 {% block title %}Home – Mastering the Pull{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center text-center mt-5">
-  <div class="col-md-8">
-
-    <h1 class="display-4 fw-bold">MASTERING THE PULL</h1>
-    <p class="lead mt-3">
+<div class="row align-items-center mt-5 mb-5">
+  <!-- Text Content -->
+  <div class="col-lg-6 mb-5 mb-lg-0 pe-lg-5 quiz-fade" style="animation-delay: 0.1s;">
+    <div class="badge mb-3 px-3 py-2" style="background: var(--blue-card); color: #1e3a52; border: 1px solid var(--blue-card-border); font-size: 0.85rem;">
+      Interactive Learning Experience
+    </div>
+    <h1 class="display-3 fw-bold" style="color: #1e3a52; letter-spacing: -1px;">
+      Mastering <br><span style="color: #64a0d2;">The Pull</span>
+    </h1>
+    <p class="lead mt-4 text-secondary" style="font-size: 1.25rem; line-height: 1.6;">
       In the next few minutes, you'll get familiar with the major upper
-      body muscle groups and the key exercises that target each one.
+      body muscle groups and the key exercises that target each one. Learn proper form, avoid common mistakes, and test your knowledge.
     </p>
 
-    <!-- GIF slideshow -->
-    <div class="mx-auto mt-4 rounded"
-         style="height: 280px; max-width: 480px; background:#ffffff; border: 1px solid rgba(100,160,210,0.3); border-radius: 12px; overflow:hidden; position:relative;">
+    <!-- Start creates a new DB session -->
+    <form action="{{ url_for('start') }}" method="POST" class="mt-5">
+      <button type="submit" class="btn btn-lg px-5 py-3 fw-bold shadow-sm start-btn" style="background-color: #1e3a52; color: #ffffff; border-radius: 8px; border: none;">
+        Begin Your Journey
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-right ms-2" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- Image/GIF Carousel -->
+  <div class="col-lg-6 quiz-fade" style="animation-delay: 0.3s;">
+    <div class="mx-auto rounded shadow-lg media-block"
+         style="height: 400px; max-width: 100%; border: 4px solid #1e3a52; position:relative; background-color: #ffffff;">
       {% set gifs = [
         'images/gif/Lat-Pulldown.gif',
         'images/gif/Face-Pull.gif',
@@ -26,52 +43,61 @@
         'images/gif/Hammer-Curl.gif'
       ] %}
       {% for gif in gifs %}
-      <img
-        class="home-gif"
-        src="{{ url_for('static', filename=gif) }}"
-        alt="Exercise preview"
-        data-index="{{ loop.index0 }}"
-        style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; background:#ffffff; opacity:0; transition: opacity 1s ease;"
-      />
+      <div class="home-gif-container w-100 h-100" style="position:absolute; top:0; left:0; opacity:0; transition: opacity 1s ease; background:#ffffff; border-radius: 8px; overflow:hidden;">
+        <img
+          src="{{ url_for('static', filename=gif) }}"
+          alt="Exercise preview"
+          style="width:100%; height:100%; object-fit:contain;"
+        />
+      </div>
       {% endfor %}
     </div>
-
-    <!-- Start creates a new DB session -->
-    <form action="{{ url_for('start') }}" method="POST" class="mt-4 mx-auto" style="max-width: 480px;">
-      <button type="submit" class="btn btn-warning btn-lg w-100">
-        CLICK TO BEGIN YOUR WEIGHT LIFTING JOURNEY
-      </button>
-    </form>
-
+    
+    <div class="d-flex justify-content-center mt-4 gap-5">
+      <div class="text-center">
+        <h3 class="fw-bold mb-0" style="color: #1e3a52;">9</h3>
+        <small class="text-secondary fw-semibold text-uppercase" style="letter-spacing: 1px;">Exercises</small>
+      </div>
+      <div style="border-left: 2px solid var(--blue-card-border);"></div>
+      <div class="text-center">
+        <h3 class="fw-bold mb-0" style="color: #1e3a52;">5</h3>
+        <small class="text-secondary fw-semibold text-uppercase" style="letter-spacing: 1px;">Quiz Qs</small>
+      </div>
+    </div>
   </div>
 </div>
+
+<style>
+.start-btn {
+  transition: all 0.2s ease-in-out;
+}
+.start-btn:hover {
+  transform: translateY(-2px);
+  background-color: #2a5070 !important;
+  box-shadow: 0 .5rem 1rem rgba(30,58,82,.25)!important;
+}
+</style>
 {% endblock %}
 
 {% block scripts %}
 <script>
 (function () {
-  var gifs     = document.querySelectorAll('.home-gif');
-  var total    = gifs.length;
+  var containers = document.querySelectorAll('.home-gif-container');
+  var total    = containers.length;
+  if(total === 0) return;
   var current  = 0;
   var SHOW_MS  = 3000;   // how long each GIF is visible
   var FADE_MS  = 1000;   // must match the CSS transition duration
 
   function showNext() {
-    // fade out current
-    gifs[current].style.opacity = '0';
-
+    containers[current].style.opacity = '0';
     current = (current + 1) % total;
-
-    // fade in next after the fade-out completes
     setTimeout(function () {
-      gifs[current].style.opacity = '1';
+      containers[current].style.opacity = '1';
     }, FADE_MS);
   }
 
-  // show first GIF immediately
-  gifs[0].style.opacity = '1';
-
-  // cycle every SHOW_MS
+  containers[0].style.opacity = '1';
   setInterval(showNext, SHOW_MS);
 })();
 </script>

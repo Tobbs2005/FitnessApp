@@ -1,5 +1,6 @@
 import json
 import os
+from collections import defaultdict
 from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -24,6 +25,18 @@ with open(os.path.join(BASE_DIR, 'data', 'quiz.json')) as f:
 
 TOTAL_LESSONS = len(EXERCISES)
 TOTAL_QUESTIONS = len(QUIZ)
+
+
+def _build_muscle_index():
+    """Map each muscle name to the list of exercises that train it."""
+    idx = defaultdict(list)
+    for ex in EXERCISES:
+        for muscle in ex['muscles']:
+            idx[muscle].append({'id': ex['id'], 'name': ex['name']})
+    return dict(idx)
+
+
+MUSCLE_INDEX = _build_muscle_index()
 
 
 def _first_existing_media(*relative_paths):
@@ -177,6 +190,7 @@ def exercises():
     return render_template(
         'exercises.html',
         exercises=items,
+        muscle_index=MUSCLE_INDEX,
     )
 
 
