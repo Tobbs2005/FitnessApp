@@ -2,88 +2,13 @@
 {% block title %}Exercises – Mastering the Pull{% endblock %}
 
 {% block content %}
-<!-- ── Muscle Diagram ────────────────────────────────────────────── -->
+<!-- ── Exercises Grid ─────────────────────────────────────────────── -->
 <div class="row mb-4 quiz-fade" style="animation-delay: 0.1s;">
   <div class="col-12 text-center">
     <h2 class="display-5 fw-bold mb-2" style="color: #0f172a; letter-spacing: -1.5px;">
-      Know Your <span style="color: #3b82f6;">Muscles</span>
+      The Core <span style="color: #3b82f6;">Movements</span>
     </h2>
     <p class="lead mb-0" style="color: #64748b; font-size: 1.05rem;">
-      Hover a pin to see the exercises that train each muscle group.
-    </p>
-  </div>
-</div>
-
-<div class="muscle-diagram quiz-fade mb-3" style="animation-delay: 0.2s;">
-
-  <div class="anatomy-stage">
-    <img src="{{ url_for('static', filename='images/anatomy/full.svg') }}"
-         alt="Anterior and posterior views of the human muscular system"
-         class="anatomy-img" />
-
-    <span class="anatomy-view-caption anatomy-view-front">Front</span>
-    <span class="anatomy-view-caption anatomy-view-back">Back</span>
-
-    {# Percentages relative to the 1442×1256 image. Front figure is the LEFT
-       half, back figure is the RIGHT half. Symmetrical muscles get L+R pins. #}
-    {% set pins = [
-      {'name': 'Upper Chest',      'x': 21.4, 'y': 23.5},
-      {'name': 'Upper Chest',      'x': 28.6, 'y': 23.5},
-      {'name': 'Front Delts',      'x': 17.8, 'y': 19.8},
-      {'name': 'Front Delts',      'x': 32.2, 'y': 19.8},
-      {'name': 'Side Delts',       'x': 14.0, 'y': 22.5},
-      {'name': 'Side Delts',       'x': 36.0, 'y': 22.5},
-      {'name': 'Biceps',           'x': 14.8, 'y': 28.5},
-      {'name': 'Biceps',           'x': 35.2, 'y': 28.5},
-      {'name': 'Brachialis',       'x': 12.8, 'y': 33.2},
-      {'name': 'Brachialis',       'x': 37.2, 'y': 33.2},
-      {'name': 'Brachioradialis',  'x': 11.2, 'y': 38.5},
-      {'name': 'Brachioradialis',  'x': 38.8, 'y': 38.5},
-
-      {'name': 'Traps',            'x': 77.4, 'y': 19.0},
-      {'name': 'Rear Delts',       'x': 70.5, 'y': 21.5},
-      {'name': 'Rear Delts',       'x': 84.3, 'y': 21.5},
-      {'name': 'Rotator Cuff',     'x': 74.5, 'y': 24.5},
-      {'name': 'Rotator Cuff',     'x': 80.3, 'y': 24.5},
-      {'name': 'Rhomboids',        'x': 77.4, 'y': 28.2},
-      {'name': 'Lats',             'x': 72.8, 'y': 33.2},
-      {'name': 'Lats',             'x': 82.0, 'y': 33.2},
-      {'name': 'Triceps',          'x': 66.5, 'y': 29.0},
-      {'name': 'Triceps',          'x': 88.3, 'y': 29.0}
-    ] %}
-    {% for pin in pins %}
-    <button type="button"
-            class="muscle-pin"
-            data-muscle="{{ pin.name }}"
-            style="left: {{ pin.x }}%; top: {{ pin.y }}%;"
-            aria-label="{{ pin.name }}">
-      <span class="muscle-pin-label">{{ pin.name }}</span>
-    </button>
-    {% endfor %}
-  </div>
-
-  <aside id="muscle-info" class="muscle-info">
-    <div class="muscle-info-placeholder">
-      <h5 class="mb-2" style="color: #0f172a; font-weight: 800;">Pick a muscle</h5>
-      <p class="mb-0" style="color: #64748b;">Hover or tap any pin on the figure to see the exercises that train it.</p>
-    </div>
-  </aside>
-</div>
-
-<p class="muscle-attribution mb-5">
-  Illustration by OpenStax &amp;
-  <a href="https://commons.wikimedia.org/wiki/User:Nefronus" target="_blank" rel="noopener">Tomáš Kebert</a>,
-  licensed under
-  <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
-</p>
-
-<!-- ── Exercises Grid ─────────────────────────────────────────────── -->
-<div class="row mb-4 quiz-fade" style="animation-delay: 0.25s;">
-  <div class="col-12 text-center">
-    <h3 class="fw-bold mb-2" style="color: #0f172a; letter-spacing: -1px;">
-      The Core <span style="color: #3b82f6;">Movements</span>
-    </h3>
-    <p class="mb-0" style="color: #64748b;">
       Master these 9 essential exercises to build a stronger, more defined upper body.
     </p>
   </div>
@@ -91,7 +16,7 @@
 
 <div class="row g-4 justify-content-center">
   {% for exercise in exercises %}
-  <div class="col-md-6 col-lg-4 quiz-fade" style="animation-delay: {{ 0.3 + (loop.index0 * 0.05) }}s;">
+  <div class="col-md-6 col-lg-4 quiz-fade" style="animation-delay: {{ 0.15 + (loop.index0 * 0.05) }}s;">
     <a href="{{ url_for('learn', lesson_num=exercise.id) }}" class="bento-card text-decoration-none" style="--accent: #3b82f6;">
 
       <!-- Top Row: Number & Arrow Icon -->
@@ -121,51 +46,4 @@
   </div>
   {% endfor %}
 </div>
-
-<script id="muscle-data" type="application/json">{{ muscle_index | tojson }}</script>
-{% endblock %}
-
-{% block scripts %}
-<script>
-(function () {
-  const muscleData = JSON.parse(document.getElementById('muscle-data').textContent);
-  const infoBox = document.getElementById('muscle-info');
-  const learnBase = "{{ url_for('learn', lesson_num=0) }}".replace(/\/0$/, '');
-
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, c => ({
-      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-    }[c]));
-  }
-
-  function activate(name) {
-    document.querySelectorAll('.muscle-pin.is-active')
-      .forEach(el => el.classList.remove('is-active'));
-    document.querySelectorAll('.muscle-pin[data-muscle="' + name + '"]')
-      .forEach(el => el.classList.add('is-active'));
-
-    const exs = muscleData[name] || [];
-    const chips = exs.map(e =>
-      '<a class="muscle-exercise-chip" href="' + learnBase + '/' + e.id + '">' +
-      escapeHtml(e.name) + '</a>'
-    ).join('');
-
-    infoBox.innerHTML =
-      '<h5 class="muscle-info-title">' + escapeHtml(name) + '</h5>' +
-      '<p class="muscle-info-sub">Exercises that train this muscle</p>' +
-      (chips
-        ? '<div class="muscle-exercise-list">' + chips + '</div>'
-        : '<p class="text-muted mb-0">No exercises listed.</p>');
-  }
-
-  document.querySelectorAll('.muscle-pin').forEach(el => {
-    el.addEventListener('mouseenter', () => activate(el.dataset.muscle));
-    el.addEventListener('focus',      () => activate(el.dataset.muscle));
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      activate(el.dataset.muscle);
-    });
-  });
-})();
-</script>
 {% endblock %}

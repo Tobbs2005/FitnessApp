@@ -210,6 +210,7 @@ def learn(lesson_num):
         media=exercise_media(exercise['id']),
         diagram=exercise_diagram(exercise['id']),
         muscle_labels=_MUSCLE_LABELS.get(exercise['id'], []),
+        muscle_index=MUSCLE_INDEX,
     )
 
 
@@ -337,4 +338,4 @@ def results():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run(debug=True, port=8000)

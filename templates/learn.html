@@ -14,52 +14,115 @@
       ></div>
     </div>
 
-    <div class="mb-2">
+    <div class="mb-3">
       <a href="{{ url_for('exercises') }}" class="btn btn-sm btn-outline-secondary">
         &larr; Back to Exercises
       </a>
     </div>
-    <h2 class="fw-bold mb-3">{{ exercise.name }}</h2>
 
     <div class="row mt-2 align-items-start">
 
-      <!-- Left: GIF -->
-      <div class="col-md-5">
-        <div
-          class="border rounded overflow-hidden d-flex align-items-center justify-content-center bg-light"
-          style="height: 300px;"
-        >
-          {% if media %}
-          <img
-            src="{{ url_for('static', filename=media) }}"
-            alt="{{ exercise.name }}"
-            class="img-fluid"
-            style="max-height: 100%;"
-          />
-          {% else %}
-          <span class="text-muted text-center p-2">No GIF available</span>
-          {% endif %}
-        </div>
-      </div>
+      <!-- Left: Unified Exercise Panel (GIF + Anatomy) -->
+      <div class="col-md-6">
+        <div class="exercise-panel quiz-fade" style="animation-delay: 0.05s;">
 
-      <!-- Right: animated info cards -->
-      <div class="col-md-7">
+          <!-- GIF -->
+          <div class="exercise-panel__gif">
+            {% if media %}
+            <img src="{{ url_for('static', filename=media) }}" alt="{{ exercise.name }}" />
+            {% else %}
+            <span class="text-muted">No GIF available</span>
+            {% endif %}
+          </div>
 
-        <!-- Muscles Targeted -->
-        <div class="learn-card fade-card" style="animation-delay: 0.05s;">
-          <p class="fw-bold mb-2" style="color:#1e3a52;">Muscles Targeted</p>
-          <div class="d-flex flex-wrap gap-2">
-            {% for muscle in exercise.muscles %}
-            <span class="badge rounded-pill px-3 py-2"
-                  style="background:#1e3a52; font-size:0.82rem; letter-spacing:0.02em;">
-              {{ muscle }}
-            </span>
-            {% endfor %}
+          <div class="exercise-panel__divider"></div>
+
+          <!-- Anatomy + Legend side-by-side -->
+          <div class="exercise-panel__anatomy">
+
+            <div class="anatomy-stage anatomy-stage--mini">
+              <img src="{{ url_for('static', filename='images/anatomy/full.svg') }}"
+                   alt="Anterior and posterior views of the human muscular system"
+                   class="anatomy-img" />
+
+              {% set pins = [
+                {'name': 'Upper Chest',      'x': 21.4, 'y': 23.5},
+                {'name': 'Upper Chest',      'x': 28.6, 'y': 23.5},
+                {'name': 'Front Delts',      'x': 17.8, 'y': 19.8},
+                {'name': 'Front Delts',      'x': 32.2, 'y': 19.8},
+                {'name': 'Side Delts',       'x': 14.0, 'y': 22.5},
+                {'name': 'Side Delts',       'x': 36.0, 'y': 22.5},
+                {'name': 'Biceps',           'x': 14.8, 'y': 28.5},
+                {'name': 'Biceps',           'x': 35.2, 'y': 28.5},
+                {'name': 'Brachialis',       'x': 12.8, 'y': 33.2},
+                {'name': 'Brachialis',       'x': 37.2, 'y': 33.2},
+                {'name': 'Brachioradialis',  'x': 11.2, 'y': 38.5},
+                {'name': 'Brachioradialis',  'x': 38.8, 'y': 38.5},
+
+                {'name': 'Traps',            'x': 77.4, 'y': 19.0},
+                {'name': 'Rear Delts',       'x': 70.5, 'y': 21.5},
+                {'name': 'Rear Delts',       'x': 84.3, 'y': 21.5},
+                {'name': 'Rotator Cuff',     'x': 74.5, 'y': 24.5},
+                {'name': 'Rotator Cuff',     'x': 80.3, 'y': 24.5},
+                {'name': 'Rhomboids',        'x': 77.4, 'y': 28.2},
+                {'name': 'Lats',             'x': 72.8, 'y': 33.2},
+                {'name': 'Lats',             'x': 82.0, 'y': 33.2},
+                {'name': 'Triceps',          'x': 66.5, 'y': 29.0},
+                {'name': 'Triceps',          'x': 88.3, 'y': 29.0}
+              ] %}
+              {% for pin in pins %}
+              <button type="button"
+                      class="muscle-pin{% if pin.name in exercise.muscles %} is-trained{% endif %}"
+                      data-muscle="{{ pin.name }}"
+                      style="left: {{ pin.x }}%; top: {{ pin.y }}%;"
+                      aria-label="{{ pin.name }}">
+                <span class="muscle-pin-label">{{ pin.name }}</span>
+              </button>
+              {% endfor %}
+
+              <!-- Floating popover for muscle info -->
+              <aside id="muscle-info" class="muscle-popover" hidden>
+                <button type="button" class="muscle-popover__close" id="muscle-info-close" aria-label="Close">×</button>
+                <div class="muscle-popover__body"></div>
+              </aside>
+            </div>
+
+            <div class="exercise-panel__legend">
+              <p class="exercise-panel__legend-label">Targets</p>
+              <div class="exercise-panel__legend-list">
+                {% for muscle in exercise.muscles %}
+                <button type="button"
+                        class="legend-pill"
+                        data-muscle="{{ muscle }}">
+                  <span class="legend-dot"></span>
+                  {{ muscle }}
+                </button>
+                {% endfor %}
+              </div>
+              <p class="exercise-panel__legend-hint">Click a muscle for related exercises.</p>
+            </div>
+
           </div>
         </div>
 
+        <p class="muscle-attribution mb-3">
+          Illustration by OpenStax &amp;
+          <a href="https://commons.wikimedia.org/wiki/User:Nefronus" target="_blank" rel="noopener">Tomáš Kebert</a>,
+          licensed under
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
+        </p>
+
+        <script id="muscle-data" type="application/json">{{ muscle_index | tojson }}</script>
+      </div>
+
+      <!-- Right: animated info cards -->
+      <div class="col-md-6">
+
+        <!-- Exercise name -->
+        <h2 class="exercise-title fw-bold mb-3">{{ exercise.name }}</h2>
+
         <!-- Steps -->
-        <p class="fw-bold mt-3 mb-2" style="color:#1e3a52;">How To:</p>
+        <p class="fw-bold mb-2" style="color:#1e3a52;">How To:</p>
         {% for step in exercise.steps %}
         <div class="learn-card fade-card d-flex align-items-start gap-3"
              style="animation-delay: {{ 0.1 + loop.index * 0.1 }}s;">
@@ -105,4 +168,88 @@
 
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  const dataEl = document.getElementById('muscle-data');
+  if (!dataEl) return;
+
+  const muscleData = JSON.parse(dataEl.textContent);
+  const popover    = document.getElementById('muscle-info');
+  const popBody    = popover.querySelector('.muscle-popover__body');
+  const closeBtn   = document.getElementById('muscle-info-close');
+  const learnBase  = "{{ url_for('learn', lesson_num=0) }}".replace(/\/0$/, '');
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  function setActive(name) {
+    document.querySelectorAll('.muscle-pin.is-active, .legend-pill.is-active')
+      .forEach(el => el.classList.remove('is-active'));
+    if (!name) return;
+    document.querySelectorAll('.muscle-pin[data-muscle="' + name + '"]')
+      .forEach(el => el.classList.add('is-active'));
+    document.querySelectorAll('.legend-pill[data-muscle="' + name + '"]')
+      .forEach(el => el.classList.add('is-active'));
+  }
+
+  function openPopover(name) {
+    const exs = muscleData[name] || [];
+    const chips = exs.map(e =>
+      '<a class="muscle-exercise-chip" href="' + learnBase + '/' + e.id + '">' +
+      escapeHtml(e.name) + '</a>'
+    ).join('');
+
+    popBody.innerHTML =
+      '<h5 class="muscle-info-title">' + escapeHtml(name) + '</h5>' +
+      '<p class="muscle-info-sub">Trains this muscle</p>' +
+      (chips
+        ? '<div class="muscle-exercise-list">' + chips + '</div>'
+        : '<p class="text-muted mb-0" style="font-size:0.75rem;">No exercises listed.</p>');
+
+    popover.hidden = false;
+    setActive(name);
+  }
+
+  function closePopover() {
+    popover.hidden = true;
+    setActive(null);
+  }
+
+  document.querySelectorAll('.muscle-pin').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openPopover(el.dataset.muscle);
+    });
+  });
+
+  document.querySelectorAll('.legend-pill').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openPopover(el.dataset.muscle);
+    });
+  });
+
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closePopover();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (popover.hidden) return;
+    if (!popover.contains(e.target)) closePopover();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePopover();
+  });
+})();
+</script>
 {% endblock %}
