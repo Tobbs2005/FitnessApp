@@ -138,32 +138,32 @@
           {{ exercise.common_mistake }}
         </div>
 
+        <!-- Navigation buttons -->
+        <div class="d-flex justify-content-between mt-4">
+
+          {% if lesson_num > 1 %}
+          <a href="{{ url_for('learn', lesson_num=lesson_num - 1) }}" class="btn btn-outline-secondary">
+            &larr; Previous
+          </a>
+          {% else %}
+          <a href="{{ url_for('exercises') }}" class="btn btn-outline-secondary">
+            &larr; Exercises
+          </a>
+          {% endif %}
+
+          {% if lesson_num < total_lessons %}
+          <a href="{{ url_for('learn', lesson_num=lesson_num + 1) }}" class="btn btn-primary">
+            Next &rarr;
+          </a>
+          {% else %}
+          <a href="{{ url_for('quiz_intro') }}" class="btn btn-warning fw-bold">
+            Go to Quiz &rarr;
+          </a>
+          {% endif %}
+
+        </div>
+
       </div>
-    </div>
-
-    <!-- Navigation buttons -->
-    <div class="d-flex justify-content-between mt-4">
-
-      {% if lesson_num > 1 %}
-      <a href="{{ url_for('learn', lesson_num=lesson_num - 1) }}" class="btn btn-outline-secondary">
-        &larr; Previous
-      </a>
-      {% else %}
-      <a href="{{ url_for('exercises') }}" class="btn btn-outline-secondary">
-        &larr; Exercises
-      </a>
-      {% endif %}
-
-      {% if lesson_num < total_lessons %}
-      <a href="{{ url_for('learn', lesson_num=lesson_num + 1) }}" class="btn btn-primary">
-        Next &rarr;
-      </a>
-      {% else %}
-      <a href="{{ url_for('quiz_intro') }}" class="btn btn-warning fw-bold">
-        Go to Quiz &rarr;
-      </a>
-      {% endif %}
-
     </div>
 
   </div>
