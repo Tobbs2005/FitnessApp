@@ -32,44 +32,40 @@
   </div>
 </div>
 
-<!-- Per-question breakdown -->
+<!-- Per-question breakdown (wrong answers only) -->
+{% set wrong_items = summary | selectattr('is_correct', 'equalto', false) | list %}
+{% if wrong_items %}
 <div class="row justify-content-center mt-2">
   <div class="col-md-10">
-    <h5 class="fw-semibold mb-3">Answer Summary</h5>
+    <h5 class="fw-semibold mb-3">Questions to Review</h5>
 
-    {% for item in summary %}
-    <div class="card mb-3 border-{{ 'success' if item.is_correct else 'danger' }}">
-      <div class="card-header fw-semibold">
-        Question {{ loop.index }}: {{ item.question }}
-      </div>
-      <div class="card-body">
+    {% for item in wrong_items %}
+    <div class="mb-3 p-3" style="background:#f8f9fa; border:1px solid #6c757d; border-radius:10px;">
+      <p class="fw-semibold mb-2">Question {{ item.num }}: {{ item.question }}</p>
 
-        <p class="mb-1">
-          <strong>Your answer:</strong>
-          <span class="badge bg-{{ 'success' if item.is_correct else 'danger' }}">
-            {{ item.chosen if item.chosen else '—' }}) {{ item.chosen_text }}
-          </span>
-        </p>
+      <p class="mb-1">
+        <strong>Your answer:</strong>
+        <span class="badge bg-danger">
+          {{ item.chosen if item.chosen else '—' }}) {{ item.chosen_text }}
+        </span>
+      </p>
 
-        {% if not item.is_correct %}
-        <p class="mb-1">
-          <strong>Correct answer:</strong>
-          <span class="badge bg-success">
-            {{ item.correct }}) {{ item.correct_text }}
-          </span>
-        </p>
-        {% endif %}
+      <p class="mb-1">
+        <strong>Correct answer:</strong>
+        <span class="badge bg-success">
+          {{ item.correct }}) {{ item.correct_text }}
+        </span>
+      </p>
 
-        {% if item.feedback %}
-        <p class="mt-2 mb-0 text-muted fst-italic">{{ item.feedback }}</p>
-        {% endif %}
-
-      </div>
+      {% if item.feedback %}
+      <p class="mt-2 mb-0 text-muted fst-italic">{{ item.feedback }}</p>
+      {% endif %}
     </div>
     {% endfor %}
 
   </div>
 </div>
+{% endif %}
 
 <!-- Action buttons -->
 <div class="row justify-content-center mt-2">

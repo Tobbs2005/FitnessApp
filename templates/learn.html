@@ -71,13 +71,15 @@
                 {'name': 'Triceps',          'x': 88.3, 'y': 29.0}
               ] %}
               {% for pin in pins %}
+              {% if pin.name in exercise.muscles %}
               <button type="button"
-                      class="muscle-pin{% if pin.name in exercise.muscles %} is-trained{% endif %}"
+                      class="muscle-pin is-trained"
                       data-muscle="{{ pin.name }}"
                       style="left: {{ pin.x }}%; top: {{ pin.y }}%;"
                       aria-label="{{ pin.name }}">
                 <span class="muscle-pin-label">{{ pin.name }}</span>
               </button>
+              {% endif %}
               {% endfor %}
 
               <!-- Floating popover for muscle info -->
@@ -134,7 +136,7 @@
         <!-- Common Mistake -->
         <div class="learn-card mistake-card fade-card mt-1"
              style="animation-delay: {{ 0.1 + (exercise.steps|length + 1) * 0.1 }}s;">
-          <span class="fw-bold" style="color:#b91c1c;">Common Mistake &mdash;</span>
+          <span class="fw-bold" style="color:#b91c1c;">&#9888; Common Mistake &mdash;</span>
           {{ exercise.common_mistake }}
         </div>
 
@@ -152,7 +154,7 @@
           {% endif %}
 
           {% if lesson_num < total_lessons %}
-          <a href="{{ url_for('learn', lesson_num=lesson_num + 1) }}" class="btn btn-primary">
+          <a href="{{ url_for('learn', lesson_num=lesson_num + 1) }}" class="btn btn-learn-next">
             Next &rarr;
           </a>
           {% else %}

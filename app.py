@@ -2,7 +2,7 @@ import json
 import os
 from collections import defaultdict
 from datetime import datetime
-from flask import Flask, render_template, redirect, url_for, request, session, jsonify
+from flask import Flask, render_template, redirect, url_for, request, session, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -230,7 +230,7 @@ def quiz(question_num):
     already_answered = str(question_num) in session.get('answers', {})
     chosen = session['answers'].get(str(question_num)) if already_answered else None
 
-    return render_template(
+    resp = make_response(render_template(
         'quiz.html',
         question=question,
         question_num=question_num,
@@ -238,7 +238,10 @@ def quiz(question_num):
         already_answered=already_answered,
         chosen=chosen,
         media=question_media(question_num),
-    )
+    ))
+    resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    resp.headers['Pragma'] = 'no-cache'
+    return resp
 
 
 @app.route('/submit_answer', methods=['POST'])
@@ -300,7 +303,8 @@ def submit_answer():
 def retake():
     session['answers'] = {}
     session['score'] = 0
-    return redirect(url_for('quiz_intro'))
+    session.modified = True
+    return redirect(url_for('quiz', question_num=1))
 
 
 @app.route('/results')
@@ -314,6 +318,7 @@ def results():
         q_num  = str(q['id'])
         chosen = answers.get(q_num)
         summary.append({
+            'num'         : q['id'],
             'question'    : q['question'],
             'chosen'      : chosen,
             'chosen_text' : q['options'].get(chosen, 'Not answered') if chosen else 'Not answered',

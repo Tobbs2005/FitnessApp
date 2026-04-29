@@ -15,7 +15,7 @@
     </div>
 
     <!-- Question -->
-    <div class="alert alert-warning fw-semibold mb-3 quiz-fade" style="animation-delay: 0.05s;">
+    <div class="learn-card fw-semibold mb-3 quiz-fade" style="animation-delay: 0.05s;">
       Question {{ question_num }}: {{ question.question }}
     </div>
 
@@ -23,12 +23,13 @@
     <div id="answer-choices" class="mb-3">
       {% for letter, text in question.options.items() %}
       <button
-        class="btn btn-outline-secondary w-100 text-start mb-2 answer-btn quiz-fade"
+        class="answer-card w-100 text-start mb-2 answer-btn quiz-fade d-flex align-items-center gap-3"
         data-letter="{{ letter }}"
         style="animation-delay: {{ 0.1 + loop.index * 0.08 }}s;"
         {% if already_answered %}disabled{% endif %}
       >
-        {{ letter }}) {{ text }}
+        <span class="step-num flex-shrink-0">{{ letter }}</span>
+        <span>{{ text }}</span>
       </button>
       {% endfor %}
     </div>
@@ -38,43 +39,41 @@
       <p id="feedback-text" class="mb-0"></p>
     </div>
 
-    <!-- Hint button + image (image hidden until button clicked) -->
-    <div id="hint-area">
-      <button id="hint-btn" class="btn btn-outline-info btn-sm mb-3">
+    <!-- Hint button + Next button on same row (always fixed, image expands below) -->
+    <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+      <button id="hint-btn" class="btn btn-outline-secondary btn-sm">
         Show Hint Image
       </button>
-      <div id="hint-image" style="display:none;">
-        {% if media %}
-        <div
-          class="border rounded overflow-hidden d-flex align-items-center justify-content-center bg-light mb-3"
-          style="max-width: 420px; height: 240px;"
-        >
-          <img
-            src="{{ url_for('static', filename=media) }}"
-            alt="Question {{ question_num }} hint image"
-            class="img-fluid"
-            style="max-height: 100%;"
-          />
-        </div>
-        {% else %}
-        <div
-          class="border rounded d-flex align-items-center justify-content-center bg-light text-muted mb-3"
-          style="max-width: 420px; height: 160px;"
-        >
-          <span class="text-center p-2 small">
-            Placeholder — add<br>
-            <code>static/images/questions/question-{{ question_num }}.png</code>
-          </span>
-        </div>
-        {% endif %}
-      </div>
-    </div>
-
-    <!-- Next button -->
-    <div class="text-end mt-2">
-      <a id="next-btn" href="#" class="btn btn-primary" style="display:none;">
+      <a id="next-btn" href="#" class="btn btn-learn-next" style="display:none;">
         {% if question_num < total_questions %}Next Question &rarr;{% else %}See Results &rarr;{% endif %}
       </a>
+    </div>
+
+    <!-- Hint image (expands below the button row) -->
+    <div id="hint-image" style="display:none;">
+      {% if media %}
+      <div
+        class="border rounded overflow-hidden d-flex align-items-center justify-content-center bg-light mb-3"
+        style="max-width: 420px; height: 240px;"
+      >
+        <img
+          src="{{ url_for('static', filename=media) }}"
+          alt="Question {{ question_num }} hint image"
+          class="img-fluid"
+          style="max-height: 100%;"
+        />
+      </div>
+      {% else %}
+      <div
+        class="border rounded d-flex align-items-center justify-content-center bg-light text-muted mb-3"
+        style="max-width: 420px; height: 160px;"
+      >
+        <span class="text-center p-2 small">
+          Placeholder — add<br>
+          <code>static/images/questions/question-{{ question_num }}.png</code>
+        </span>
+      </div>
+      {% endif %}
     </div>
 
     <!-- Re-render answered state on back-navigation -->
@@ -138,13 +137,11 @@ $(function () {
 function applyFeedback(chosen, correct, feedbackText, nextUrl) {
   $('.answer-btn').each(function () {
     var letter = $(this).data('letter');
-    $(this).removeClass('btn-outline-secondary btn-success btn-danger');
+    $(this).removeClass('answer-card--correct answer-card--wrong');
     if (letter === correct) {
-      $(this).addClass('btn-success');
+      $(this).addClass('answer-card--correct');
     } else if (letter === chosen && chosen !== correct) {
-      $(this).addClass('btn-danger');
-    } else {
-      $(this).addClass('btn-outline-secondary');
+      $(this).addClass('answer-card--wrong');
     }
     $(this).prop('disabled', true);
   });

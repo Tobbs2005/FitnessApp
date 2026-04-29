@@ -2,24 +2,23 @@
 {% block title %}Quiz Time – Mastering the Pull{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center text-center mt-5">
+<div class="row justify-content-center text-center mt-5 pt-4">
   <div class="col-md-8">
 
     <h1 class="display-4 fw-bold">QUIZ TIME</h1>
 
     <p class="lead mt-3">
-      You just learned 9 upper body exercises. Now let's see how much you
-      retained. For each question, click on the best answer.
+      Test your knowledge of the 9 upper body exercises covered. Select the best answer for each question.
     </p>
-    <p class="text-muted">Don't worry about being wrong — we will teach you!!</p>
+    <p class="text-muted">Incorrect answers will include an explanation to help reinforce the correct concept.</p>
 
     <div class="d-flex justify-content-center gap-3 mt-3">
       <a href="{{ url_for('exercises') }}" class="btn btn-outline-secondary btn-lg px-4">
         &larr; Review Exercises
       </a>
-      <a href="{{ url_for('quiz', question_num=1) }}" class="btn btn-warning btn-lg px-5">
-        Begin QUIZ!
-      </a>
+      <form action="{{ url_for('retake') }}" method="POST" class="d-inline">
+        <button type="submit" class="btn btn-learn-next btn-lg px-5">Begin QUIZ!</button>
+      </form>
     </div>
 
   </div>
