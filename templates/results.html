@@ -71,11 +71,11 @@
 <div class="row justify-content-center mt-2">
   <div class="col-md-8 text-center">
     <p class="fw-semibold">Feel Free To Keep Reviewing the Exercises!</p>
-    <a href="{{ url_for('learn', lesson_num=1) }}" class="btn btn-outline-primary me-2">
+    <a href="{{ url_for('learn', lesson_num=1) }}" class="btn btn-outline-secondary me-2">
       Review Exercises
     </a>
     <form action="{{ url_for('retake') }}" method="POST" class="d-inline">
-      <button type="submit" class="btn btn-warning">Retake Quiz</button>
+      <button type="submit" class="btn btn-learn-next">Retake Quiz</button>
     </form>
   </div>
 </div>

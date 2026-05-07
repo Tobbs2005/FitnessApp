@@ -106,6 +106,7 @@ _MUSCLE_LABELS = {
 def question_media(question_num):
     return _first_existing_media(
         f'images/questions/question-{question_num}.gif',
+        f'images/questions/question-{question_num}.jpg',
         f'images/questions/question-{question_num}.png',
     )
 

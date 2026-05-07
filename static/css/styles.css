@@ -1,6 +1,20 @@
 :root {
   --blue-card: rgba(200, 223, 240, 0.55);
   --blue-card-border: rgba(100, 160, 210, 0.35);
+
+  /* 4-tone palette */
+  --color-primary:      #1e3a52;
+  --color-primary-dark: #16304a;
+  --color-text:         #1a2b3c;
+  --color-muted:        #64748b;
+  --color-surface:      #f8fafc;
+
+  /* 5-step type scale */
+  --text-xs:   0.72rem;   /* labels, captions, metadata */
+  --text-sm:   0.82rem;   /* secondary text, chips */
+  --text-base: 0.95rem;   /* body, card content */
+  --text-lg:   1.25rem;   /* nav brand, card numbers */
+  --text-xl:   1.4rem;    /* titles */
 }
 
 body.app-body {
@@ -29,7 +43,7 @@ body.app-body {
 
 .navbar-brand {
   color: #0f172a !important;
-  font-size: 1.25rem;
+  font-size: var(--text-lg);
 }
 
 .navbar .nav-link {
@@ -40,28 +54,7 @@ body.app-body {
 }
 
 .navbar .nav-link:hover {
-  color: #3b82f6 !important;
-}
-
-/* Exercise / Bootstrap cards (exercises grid) */
-.card {
-  background: #1e3a52 !important;
-  border: 1px solid rgba(100, 160, 210, 0.3) !important;
-  border-radius: 12px;
-}
-
-.card,
-.card .card-title,
-.card .card-text {
-  color: #ffffff !important;
-}
-
-.card .text-muted {
-  color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.card .border-bottom {
-  border-bottom-color: rgba(255, 255, 255, 0.14) !important;
+  color: var(--color-primary) !important;
 }
 
 /* ── Learn page info cards ─────────────────────────────────────── */
@@ -82,8 +75,8 @@ body.app-body {
   border-radius: 10px;
   padding: 0.75rem 1rem;
   margin-bottom: 0.6rem;
-  color: #1a2b3c;
-  font-size: 0.95rem;
+  color: var(--color-text);
+  font-size: var(--text-base);
 }
 
 .mistake-card {
@@ -98,9 +91,9 @@ body.app-body {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: #1e3a52;
+  background: var(--color-primary);
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
   font-weight: 700;
 }
 
@@ -111,8 +104,8 @@ body.app-body {
   border: 1px solid var(--blue-card-border);
   border-radius: 10px;
   padding: 0.75rem 1rem;
-  color: #1a2b3c;
-  font-size: 0.95rem;
+  color: var(--color-text);
+  font-size: var(--text-base);
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
@@ -150,7 +143,7 @@ body.app-body {
   background: var(--blue-card) !important;
   border: 1px solid var(--blue-card-border) !important;
   border-radius: 10px;
-  color: #1a2b3c;
+  color: var(--color-text);
 }
 
 /* ── Bento-style Exercise Cards ────────────────────────────────── */
@@ -158,14 +151,14 @@ body.app-body {
 .bento-card {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: rgba(200, 223, 240, 0.18);
   border-radius: 28px;
   padding: 1.75rem;
   min-height: 320px;
   position: relative;
   box-shadow: 0 4px 24px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-  border: 1px solid rgba(15, 23, 42, 0.04);
+  border: 1px solid var(--blue-card-border);
   overflow: hidden;
 }
 
@@ -176,7 +169,7 @@ body.app-body {
   left: 0;
   right: 0;
   height: 6px;
-  background: var(--accent, #3b82f6);
+  background: var(--accent, var(--color-primary));
   opacity: 0.85;
   transition: opacity 0.3s ease, height 0.3s ease;
 }
@@ -184,7 +177,7 @@ body.app-body {
 .bento-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 48px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.02);
-  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  border-color: rgba(100, 160, 210, 0.6);
 }
 
 .bento-card:hover::before {
@@ -202,23 +195,23 @@ body.app-body {
 }
 
 .bento-number {
-  font-size: 1.15rem;
+  font-size: var(--text-lg);
   font-weight: 800;
-  color: #cbd5e1;
+  color: #94a3b8;
   letter-spacing: 0.5px;
   transition: color 0.3s ease;
 }
 
 .bento-card:hover .bento-number {
-  color: color-mix(in srgb, var(--accent) 60%, #cbd5e1);
+  color: var(--color-primary);
 }
 
 .bento-icon {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--accent) 12%, #f8fafc);
-  color: var(--accent, #94a3b8);
+  background: rgba(30, 58, 82, 0.1);
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -226,10 +219,10 @@ body.app-body {
 }
 
 .bento-card:hover .bento-icon {
-  background: var(--accent, #3b82f6);
+  background: var(--color-primary);
   color: #ffffff;
   transform: scale(1.1) rotate(15deg);
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 4px 12px rgba(30, 58, 82, 0.3);
 }
 
 .bento-image-wrapper {
@@ -245,7 +238,7 @@ body.app-body {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  mix-blend-mode: multiply; /* Ensures the GIF's white background perfectly blends */
+  mix-blend-mode: multiply;
   transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -258,7 +251,7 @@ body.app-body {
 }
 
 .bento-title {
-  font-size: 1.35rem;
+  font-size: var(--text-xl);
   font-weight: 800;
   color: #0f172a;
   margin-bottom: 0.25rem;
@@ -266,9 +259,9 @@ body.app-body {
 }
 
 .bento-muscles {
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
   font-weight: 700;
-  color: #64748b;
+  color: var(--color-muted);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin: 0;
@@ -281,14 +274,38 @@ body.app-body {
   animation: fadeInUp 0.4s ease forwards;
 }
 
+/* ── Quiz hint image frame ───────────────────────────────────────── */
+
+.hint-image-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 480px;
+  height: 260px;
+  background: var(--color-surface);
+  border: 1px solid var(--blue-card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0.75rem;
+  box-sizing: border-box;
+}
+
+.hint-image-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
 .btn-learn-next {
-  background: #1e3a52;
+  background: var(--color-primary);
   border: none;
   color: #ffffff;
 }
 
 .btn-learn-next:hover {
-  background: #16304a;
+  background: var(--color-primary-dark);
   color: #ffffff;
 }
 
@@ -344,12 +361,12 @@ body.app-body {
 }
 
 .muscle-diagram--stacked .muscle-pin-label {
-  font-size: 0.65rem;
+  font-size: var(--text-xs);
   padding: 3px 6px;
 }
 
 .muscle-diagram--stacked .anatomy-view-caption {
-  font-size: 0.65rem;
+  font-size: var(--text-xs);
 }
 
 .muscle-diagram--stacked .muscle-info {
@@ -367,7 +384,7 @@ body.app-body {
 .anatomy-view-caption {
   position: absolute;
   top: 0;
-  font-size: 0.72rem;
+  font-size: var(--text-xs);
   font-weight: 800;
   color: #94a3b8;
   text-transform: uppercase;
@@ -401,8 +418,8 @@ body.app-body {
   padding: 0;
   border-radius: 50%;
   border: 2px solid #ffffff;
-  background: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.35),
+  background: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(30, 58, 82, 0.3),
               0 4px 10px rgba(15, 23, 42, 0.18);
   transform: translate(-50%, -50%);
   cursor: pointer;
@@ -426,7 +443,7 @@ body.app-body {
   transform: translateX(-50%);
   background: #0f172a;
   color: #ffffff;
-  font-size: 0.72rem;
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.3px;
   padding: 4px 8px;
@@ -451,8 +468,8 @@ body.app-body {
 .muscle-pin:focus-visible,
 .muscle-pin.is-active {
   transform: translate(-50%, -50%) scale(1.25);
-  background: #2563eb;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.35),
+  background: var(--color-primary-dark);
+  box-shadow: 0 0 0 4px rgba(30, 58, 82, 0.3),
               0 6px 14px rgba(15, 23, 42, 0.25);
   outline: none;
 }
@@ -499,18 +516,18 @@ body.app-body {
 
 .muscle-attribution {
   text-align: center;
-  font-size: 0.78rem;
+  font-size: var(--text-sm);
   color: #94a3b8;
 }
 
 .muscle-attribution a {
-  color: #64748b;
+  color: var(--color-muted);
   text-decoration: underline;
   text-decoration-color: rgba(100, 116, 139, 0.35);
 }
 
 .muscle-attribution a:hover {
-  color: #3b82f6;
+  color: var(--color-primary);
 }
 
 .muscle-info {
@@ -518,7 +535,7 @@ body.app-body {
   border: 1px solid var(--blue-card-border);
   border-radius: 18px;
   padding: 1.25rem 1.35rem;
-  color: #1a2b3c;
+  color: var(--color-text);
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -530,13 +547,13 @@ body.app-body {
   color: #0f172a;
   font-weight: 800;
   letter-spacing: -0.5px;
-  font-size: 1.35rem;
+  font-size: var(--text-xl);
   margin-bottom: 0.4rem;
 }
 
 .muscle-info-sub {
-  color: #64748b;
-  font-size: 0.78rem;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -554,18 +571,18 @@ body.app-body {
   align-items: center;
   padding: 0.45rem 0.85rem;
   background: #ffffff;
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  border: 1px solid var(--blue-card-border);
   border-radius: 999px;
-  color: #1e3a52;
-  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-size: var(--text-sm);
   font-weight: 600;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .muscle-exercise-chip:hover {
-  background: #3b82f6;
-  border-color: #3b82f6;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
   color: #ffffff;
   transform: translateY(-1px);
 }
@@ -642,7 +659,7 @@ body.app-body {
   width: 20px;
   height: 20px;
   border-width: 2px;
-  box-shadow: 0 0 0 2.5px rgba(59, 130, 246, 0.35),
+  box-shadow: 0 0 0 2.5px rgba(30, 58, 82, 0.3),
               0 3px 9px rgba(15, 23, 42, 0.18);
 }
 
@@ -653,7 +670,7 @@ body.app-body {
 }
 
 .anatomy-stage--mini .muscle-pin-label {
-  font-size: 0.78rem;
+  font-size: var(--text-sm);
   padding: 5px 9px;
 }
 
@@ -666,11 +683,11 @@ body.app-body {
 }
 
 .exercise-panel__legend-label {
-  font-size: 0.72rem;
+  font-size: var(--text-xs);
   font-weight: 800;
   letter-spacing: 1.6px;
   text-transform: uppercase;
-  color: #64748b;
+  color: var(--color-muted);
   margin: 0;
 }
 
@@ -682,7 +699,7 @@ body.app-body {
 }
 
 .exercise-panel__legend-hint {
-  font-size: 0.78rem;
+  font-size: var(--text-sm);
   color: #94a3b8;
   margin: 0.25rem 0 0;
   line-height: 1.4;
@@ -697,7 +714,7 @@ body.app-body {
   border: 1px solid rgba(245, 158, 11, 0.35);
   border-radius: 999px;
   color: #92400e;
-  font-size: 0.82rem;
+  font-size: var(--text-sm);
   font-weight: 700;
   cursor: pointer;
   transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
@@ -762,7 +779,7 @@ body.app-body {
   border: none;
   background: transparent;
   color: #94a3b8;
-  font-size: 1.2rem;
+  font-size: var(--text-lg);
   line-height: 1;
   cursor: pointer;
   padding: 0;
@@ -773,7 +790,7 @@ body.app-body {
 }
 
 .muscle-popover .muscle-info-title {
-  font-size: 0.95rem;
+  font-size: var(--text-base);
   font-weight: 800;
   color: #0f172a;
   margin: 0 0 0.15rem;
@@ -781,7 +798,7 @@ body.app-body {
 }
 
 .muscle-popover .muscle-info-sub {
-  font-size: 0.62rem;
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.8px;
   color: #94a3b8;
@@ -796,6 +813,6 @@ body.app-body {
 }
 
 .muscle-popover .muscle-exercise-chip {
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   padding: 0.3rem 0.6rem;
 }

@@ -52,25 +52,18 @@
     <!-- Hint image (expands below the button row) -->
     <div id="hint-image" style="display:none;">
       {% if media %}
-      <div
-        class="border rounded overflow-hidden d-flex align-items-center justify-content-center bg-light mb-3"
-        style="max-width: 420px; height: 240px;"
-      >
+      <div class="hint-image-frame mb-3">
         <img
           src="{{ url_for('static', filename=media) }}"
           alt="Question {{ question_num }} hint image"
-          class="img-fluid"
-          style="max-height: 100%;"
+          class="hint-image-img"
         />
       </div>
       {% else %}
-      <div
-        class="border rounded d-flex align-items-center justify-content-center bg-light text-muted mb-3"
-        style="max-width: 420px; height: 160px;"
-      >
+      <div class="hint-image-frame mb-3 text-muted">
         <span class="text-center p-2 small">
           Placeholder — add<br>
-          <code>static/images/questions/question-{{ question_num }}.png</code>
+          <code>static/images/questions/question-{{ question_num }}.jpg</code>
         </span>
       </div>
       {% endif %}
@@ -126,10 +119,9 @@ $(function () {
   });
 
   $('#hint-btn').on('click', function () {
+    var isVisible = $('#hint-image').is(':visible');
     $('#hint-image').slideToggle(200);
-    $(this).text(
-      $('#hint-image').is(':visible') ? 'Hide Hint Image' : 'Show Hint Image'
-    );
+    $(this).text(isVisible ? 'Show Hint Image' : 'Hide Hint Image');
   });
 
 });

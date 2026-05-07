@@ -3,17 +3,17 @@
     "id": 1,
     "question": "When doing the lat pulldown, what should you think about to properly engage your back?",
     "options": {
-      "A": "Pulling the bar with your hands",
+      "A": "Driving your elbows down toward your hips",
       "B": "Keeping your elbows straight",
-      "C": "Driving your elbows down toward your hips",
+      "C": "Pulling the bar with your hands",
       "D": "Squeezing your chest at the bottom"
     },
-    "correct": "C",
+    "correct": "A",
     "explanations": {
-      "A": "Incorrect. Pulling with your hands is actually the most common mistake on this exercise. It shifts the work to your arms instead of your lats. The correct answer is C.",
-      "B": "Incorrect. Keeping your elbows straight would make it impossible to pull the bar down at all. The correct answer is C.",
-      "C": "Correct! Thinking about driving your elbows down toward your hips helps you engage your lats instead of letting your arms take over.",
-      "D": "Incorrect. The lat pulldown is a back exercise, not a chest exercise. You should be squeezing your shoulder blades together at the bottom. The correct answer is C."
+      "A": "Correct! Thinking about driving your elbows down toward your hips helps you engage your lats instead of letting your arms take over.",
+      "B": "Incorrect. Keeping your elbows straight would make it impossible to pull the bar down at all. The correct answer is A.",
+      "C": "Incorrect. Pulling with your hands is actually the most common mistake on this exercise. It shifts the work to your arms instead of your lats. The correct answer is A.",
+      "D": "Incorrect. The lat pulldown is a back exercise, not a chest exercise. You should be squeezing your shoulder blades together at the bottom. The correct answer is A."
     }
   },
   {
@@ -21,16 +21,16 @@
     "question": "Which of these exercises targets the rotator cuff in addition to the rear delts and traps?",
     "options": {
       "A": "Barbell Bent Over Row",
-      "B": "Close Grip Cable Row",
-      "C": "Face Pulls",
-      "D": "Hammer Curl"
+      "B": "Face Pulls",
+      "C": "Hammer Curl",
+      "D": "Close Grip Cable Row"
     },
-    "correct": "C",
+    "correct": "B",
     "explanations": {
-      "A": "Incorrect. The barbell bent over row targets the lats, rhomboids, traps, and biceps but not the rotator cuff specifically. The correct answer is C.",
-      "B": "Incorrect. The close grip cable row targets the lats, rhomboids, biceps, and rear delts. The correct answer is C.",
-      "C": "Correct! Face pulls are one of the few exercises that directly target the rotator cuff alongside the rear delts and traps, making them great for shoulder health.",
-      "D": "Incorrect. The hammer curl targets the biceps, brachialis, and brachioradialis. The correct answer is C."
+      "A": "Incorrect. The barbell bent over row targets the lats, rhomboids, traps, and biceps but not the rotator cuff specifically. The correct answer is B.",
+      "B": "Correct! Face pulls are one of the few exercises that directly target the rotator cuff alongside the rear delts and traps, making them great for shoulder health.",
+      "C": "Incorrect. The hammer curl targets the biceps, brachialis, and brachioradialis. The correct answer is B.",
+      "D": "Incorrect. The close grip cable row targets the lats, rhomboids, biceps, and rear delts. The correct answer is B."
     }
   },
   {
@@ -38,16 +38,16 @@
     "question": "What is the key difference between the hammer curl and the preacher curl?",
     "options": {
       "A": "The hammer curl uses a bench to isolate the biceps",
-      "B": "The preacher curl also targets the brachioradialis",
-      "C": "The hammer curl is performed with palms facing inward while the preacher curl uses an EZ bar on a bench",
-      "D": "They target the exact same muscles"
+      "B": "They target the exact same muscles",
+      "C": "The preacher curl also targets the brachioradialis",
+      "D": "The hammer curl is performed with palms facing inward while the preacher curl uses an EZ bar on a bench"
     },
-    "correct": "C",
+    "correct": "D",
     "explanations": {
-      "A": "Incorrect. It is the preacher curl, not the hammer curl, that uses a bench pad to isolate the biceps. The correct answer is C.",
-      "B": "Incorrect. It is actually the hammer curl that targets the brachioradialis, not the preacher curl. The correct answer is C.",
-      "C": "Correct! The hammer curl is done standing with palms facing inward and also hits the brachioradialis, while the preacher curl uses an EZ bar on a bench pad to fully isolate the biceps.",
-      "D": "Incorrect. While both target the biceps and brachialis, the hammer curl additionally targets the brachioradialis and is performed in a completely different position. The correct answer is C."
+      "A": "Incorrect. It is the preacher curl, not the hammer curl, that uses a bench pad to isolate the biceps. The correct answer is D.",
+      "B": "Incorrect. While both target the biceps and brachialis, the hammer curl additionally targets the brachioradialis and is performed in a completely different position. The correct answer is D.",
+      "C": "Incorrect. It is actually the hammer curl that targets the brachioradialis, not the preacher curl. The correct answer is D.",
+      "D": "Correct! The hammer curl is done standing with palms facing inward and also hits the brachioradialis, while the preacher curl uses an EZ bar on a bench pad to fully isolate the biceps."
     }
   },
   {
@@ -69,19 +69,19 @@
   },
   {
     "id": 5,
-    "question": "Which two exercises both require you to keep your elbows high during the movement?",
+    "question": "Which exercise requires you to keep your elbows high and your shoulders raised throughout the movement?",
     "options": {
-      "A": "Face Pulls and Dumbbell Lateral Raise",
-      "B": "Overhead Press and Barbell Bent Over Row",
-      "C": "Preacher Curl and Hammer Curl",
-      "D": "Close Grip Cable Row and Tricep Pushdown"
+      "A": "Barbell Bent Over Row",
+      "B": "Tricep Pushdown",
+      "C": "Dumbbell Lateral Raise",
+      "D": "Hammer Curl"
     },
-    "correct": "A",
+    "correct": "C",
     "explanations": {
-      "A": "Correct! Face pulls require you to keep your elbows high and parallel to the ground to target the rear delts, and the dumbbell lateral raise requires you to raise your arms out to the sides until they are parallel to the floor.",
-      "B": "Incorrect. The overhead press has you pressing straight up and the bent over row has you driving your elbows back, not keeping them high. The correct answer is A.",
-      "C": "Incorrect. Both curl variations keep the elbows tucked at the sides or pressed against a pad, not raised high. The correct answer is A.",
-      "D": "Incorrect. The cable row has you pulling toward your stomach and the tricep pushdown has you keeping elbows pinned to your sides. The correct answer is A."
+      "A": "Incorrect. The barbell bent over row requires you to drive your elbows back toward your hips, not keep them raised high. The correct answer is C.",
+      "B": "Incorrect. The tricep pushdown requires your elbows to stay pinned to your sides throughout the movement. The correct answer is C.",
+      "C": "Correct! The dumbbell lateral raise requires you to raise your arms out to your sides with your elbows slightly above your wrists, keeping your shoulders elevated until your arms are parallel to the floor.",
+      "D": "Incorrect. The hammer curl is performed with your elbows tucked at your sides, not raised high. The correct answer is C."
     }
   },
   {
@@ -103,19 +103,19 @@
   },
   {
     "id": 7,
-    "question": "Which exercise requires you to separate your hands as you perform the movement?",
+    "question": "When performing the barbell overhead press, what is the most common mistake to avoid?",
     "options": {
-      "A": "Close Grip Cable Row",
-      "B": "Barbell Bent Over Row",
-      "C": "Face Pulls",
-      "D": "Dumbbell Lateral Raise"
+      "A": "Pressing the bar straight up overhead",
+      "B": "Keeping your core engaged throughout the lift",
+      "C": "Arching your lower back excessively as you press overhead",
+      "D": "Locking out your elbows at the top of the movement"
     },
     "correct": "C",
     "explanations": {
-      "A": "Incorrect. The close grip cable row uses a fixed handle that stays together throughout the movement. The correct answer is C.",
-      "B": "Incorrect. The barbell bent over row uses a fixed bar so your hands stay in place throughout the movement. The correct answer is C.",
-      "C": "Correct! Face pulls use a rope attachment and require you to separate your hands as you pull toward your face, which is key to properly engaging the rear delts.",
-      "D": "Incorrect. The dumbbell lateral raise has you raising both arms out to the sides simultaneously, there is no separation of the hands involved. The correct answer is C."
+      "A": "Incorrect. Pressing straight up is actually the correct path for this exercise. The correct answer is C.",
+      "B": "Incorrect. Keeping your core engaged is correct form, not a mistake. It helps protect your lower back during the press. The correct answer is C.",
+      "C": "Correct! The most common mistake on the overhead press is letting your lower back arch excessively as you press, which puts unnecessary strain on the spine. Keeping your core braced prevents this.",
+      "D": "Incorrect. Locking out at the top is generally acceptable on the overhead press and is not the primary mistake to watch for. The correct answer is C."
     }
   }
 ]
