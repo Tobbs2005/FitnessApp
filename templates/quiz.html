@@ -39,8 +39,8 @@
       <p id="feedback-text" class="mb-0"></p>
     </div>
 
-    <!-- Hint button + Next button on same row (always fixed, image expands below) -->
-    <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+    <!-- Button row: never moves regardless of image -->
+    <div class="d-flex justify-content-between align-items-center mt-2 mb-2">
       <button id="hint-btn" class="btn btn-outline-secondary btn-sm">
         Show Hint Image
       </button>
@@ -49,10 +49,10 @@
       </a>
     </div>
 
-    <!-- Hint image (expands below the button row) -->
-    <div id="hint-image" style="display:none;">
+    <!-- Image appears below the buttons, centered, does not affect button row -->
+    <div id="hint-image" style="display:none;" class="mb-3 text-center">
       {% if media %}
-      <div class="hint-image-frame mb-3">
+      <div class="hint-image-frame">
         <img
           src="{{ url_for('static', filename=media) }}"
           alt="Question {{ question_num }} hint image"
@@ -60,7 +60,7 @@
         />
       </div>
       {% else %}
-      <div class="hint-image-frame mb-3 text-muted">
+      <div class="hint-image-frame text-muted">
         <span class="text-center p-2 small">
           Placeholder — add<br>
           <code>static/images/questions/question-{{ question_num }}.jpg</code>
@@ -69,18 +69,7 @@
       {% endif %}
     </div>
 
-    <!-- Re-render answered state on back-navigation -->
-    {% if already_answered %}
-    <script>
-      $(function () {
-        var chosen   = "{{ chosen }}";
-        var correct  = "{{ question.correct }}";
-        var feedback = {{ question.explanations | tojson }};
-        var nextUrl  = "{{ url_for('quiz', question_num=question_num + 1) if question_num < total_questions else url_for('results') }}";
-        applyFeedback(chosen, correct, feedback[chosen], nextUrl);
-      });
-    </script>
-    {% endif %}
+    </div>
 
   </div>
 </div>
@@ -142,5 +131,15 @@ function applyFeedback(chosen, correct, feedbackText, nextUrl) {
   $('#feedback-box').show();
   $('#next-btn').attr('href', nextUrl).show();
 }
+
+{% if already_answered %}
+$(function () {
+  var chosen   = "{{ chosen }}";
+  var correct  = "{{ question.correct }}";
+  var feedback = {{ question.explanations | tojson }};
+  var nextUrl  = "{{ url_for('quiz', question_num=question_num + 1) if question_num < total_questions else url_for('results') }}";
+  applyFeedback(chosen, correct, feedback[chosen], nextUrl);
+});
+{% endif %}
 </script>
 {% endblock %}

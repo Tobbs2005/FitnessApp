@@ -277,12 +277,11 @@ body.app-body {
 /* ── Quiz hint image frame ───────────────────────────────────────── */
 
 .hint-image-frame {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 480px;
-  height: 260px;
+  width: 350px;
+  height: 275px;
   background: var(--color-surface);
   border: 1px solid var(--blue-card-border);
   border-radius: 12px;
