@@ -297,6 +297,10 @@ body.app-body {
   border-radius: 6px;
 }
 
+.progress-bar--theme {
+  background-color: #64a0d2;
+}
+
 .btn-learn-next {
   background: var(--color-primary);
   border: none;
