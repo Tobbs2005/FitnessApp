@@ -27,7 +27,7 @@ Then open **http://127.0.0.1:5000** in your browser.
     └── results.html     # Final score + answer breakdown
 ```
 
-## Team
+## Team Members
 
-- **Akrisht Kaul** — backend, data, routes
-- **Toby** — UI design and styling
+- Akrisht Kaul — [akrishtkaul](https://github.com/akrishtkaul)
+- Toby — [Tobbs2005](https://github.com/Tobbs2005)
